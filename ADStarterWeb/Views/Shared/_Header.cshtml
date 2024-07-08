@@ -148,16 +148,16 @@
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
-                            @if (User.IsInRole(SD.Role_Parent))
+                            @if (User.IsInRole(SD.Role_Comittee))
                             {
                                 <li><a asp-area="Parent" asp-controller="Registration" asp-action="UserEdit"><i data-feather="user"></i><span>Account </span></a></li>
                             }@if (User.IsInRole(SD.Role_Admin))
                             {
                                 <li><a asp-area="Admin" asp-controller="AdminDashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
-                            }@if (User.IsInRole(SD.Role_Therapist))
+                            }@if (User.IsInRole(SD.Role_Student))
                             {
                                 <li><a asp-area="Therapist" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
-                            }@if (User.IsInRole(SD.Role_Customer_service))
+                            }@if (User.IsInRole(SD.Role_Lecturer))
                             {
                                 <li><a asp-area="Customer Service" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
                             }

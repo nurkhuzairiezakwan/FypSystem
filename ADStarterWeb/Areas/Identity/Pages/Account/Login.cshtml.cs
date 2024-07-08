@@ -121,19 +121,19 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     // Redirect based on role with user ID
                     if (roles.Contains("Admin"))
                     {
-                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
-                    else if (roles.Contains("Customer Service"))
+                    else if (roles.Contains("Lecturer"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "CustomerService" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Lecturer" });
                     }
-                    else if (roles.Contains("Therapist"))
+                    else if (roles.Contains("Student"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Therapist" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Student" });
                     }
-                    else if (roles.Contains("Parent"))
+                    else if (roles.Contains("Comittee"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Parent"});
+                        return RedirectToAction("Index", "Dashboard", new { area = "Comittee"});
                     }
                     return LocalRedirect(returnUrl);
                 }

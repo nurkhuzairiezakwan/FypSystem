@@ -91,9 +91,9 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Therapist)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer_service)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Parent)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Lecturer)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Comittee)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Student)).GetAwaiter().GetResult();
             }
 
             Input = new InputModel();
@@ -127,7 +127,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _userManager.AddToRoleAsync(user, SD.Role_Parent);
+                        await _userManager.AddToRoleAsync(user, SD.Role_Student);
                     }
 
                     var userRoles = await _userManager.GetRolesAsync(user);
@@ -143,19 +143,19 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
                     if (userRoles.Contains("Admin"))
                     {
-                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
-                    else if (userRoles.Contains("Customer Service"))
+                    else if (userRoles.Contains("Lecturer"))
                     {
-                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
-                    else if (userRoles.Contains("Therapist"))
+                    else if (userRoles.Contains("Comittee"))
                     {
-                        return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }
-                    else if (userRoles.Contains("Parent"))
+                    else if (userRoles.Contains("Student"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Parent" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Student" });
                     }
                     return LocalRedirect(returnUrl);
                 }

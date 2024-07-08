@@ -2,10 +2,10 @@
 
 namespace ADStarterWeb.Areas.Parent.Controllers
 {
-    [Area("Parent")]
-    public class landingPageController : Controller
+    [Area("LandingPage")]
+    public class LandingPageController : Controller
     {
-        public IActionResult landingPage()
+        public IActionResult Index()
         {
             return View();
         }
