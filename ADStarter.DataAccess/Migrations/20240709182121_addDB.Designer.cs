@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240709152732_addDb")]
-    partial class addDb
+    [Migration("20240709182121_addDB")]
+    partial class addDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,22 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasKey("course_ID");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            course_ID = 1,
+                            course_code = "SECPH",
+                            course_count = "41",
+                            course_desc = "Data Engineering"
+                        },
+                        new
+                        {
+                            course_ID = 2,
+                            course_code = "SECJ",
+                            course_count = "41",
+                            course_desc = "Software Engineering"
+                        });
                 });
 
             modelBuilder.Entity("ADStarter.Models.ProjectType", b =>
@@ -61,6 +77,101 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasKey("pt_ID");
 
                     b.ToTable("ProjectTypes");
+                });
+
+            modelBuilder.Entity("ADStarter.Models.Proposal", b =>
+                {
+                    b.Property<int>("p_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("p_id"));
+
+                    b.Property<int>("Students_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("p_evaluator1_comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("p_evaluator2_comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("p_file")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("p_sv_comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("p_title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("s_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("st_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("p_id");
+
+                    b.HasIndex("Students_id");
+
+                    b.ToTable("Proposals");
+                });
+
+            modelBuilder.Entity("ADStarter.Models.Student", b =>
+                {
+                    b.Property<int>("s_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("s_id"));
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("s_SV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_SVagreement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_academic_session")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_evaluator1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_evaluator2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_semester")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_statusSV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("s_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("s_id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -307,6 +418,26 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("ADStarter.Models.Proposal", b =>
+                {
+                    b.HasOne("ADStarter.Models.Student", "Student")
+                        .WithMany("Proposals")
+                        .HasForeignKey("Students_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("ADStarter.Models.Student", b =>
+                {
+                    b.HasOne("ADStrater.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -371,6 +502,11 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("course");
 
                     b.Navigation("projecttype");
+                });
+
+            modelBuilder.Entity("ADStarter.Models.Student", b =>
+                {
+                    b.Navigation("Proposals");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addDb : Migration
+    public partial class addDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -202,6 +204,67 @@ namespace ADStarter.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    s_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    s_user = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_evaluator1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_evaluator2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_SV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_statusSV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_academic_session = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_semester = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    s_SVagreement = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.s_id);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Proposals",
+                columns: table => new
+                {
+                    p_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    s_id = table.Column<int>(type: "int", nullable: false),
+                    p_title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    p_file = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    st_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    p_sv_comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    p_evaluator1_comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    p_evaluator2_comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Students_id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Proposals", x => x.p_id);
+                    table.ForeignKey(
+                        name: "FK_Proposals_Students_Students_id",
+                        column: x => x.Students_id,
+                        principalTable: "Students",
+                        principalColumn: "s_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "course_ID", "course_code", "course_count", "course_desc" },
+                values: new object[,]
+                {
+                    { 1, "SECPH", "41", "Data Engineering" },
+                    { 2, "SECJ", "41", "Software Engineering" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -250,6 +313,16 @@ namespace ADStarter.DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Proposals_Students_id",
+                table: "Proposals",
+                column: "Students_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_UserId",
+                table: "Students",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -271,7 +344,13 @@ namespace ADStarter.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Proposals");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
