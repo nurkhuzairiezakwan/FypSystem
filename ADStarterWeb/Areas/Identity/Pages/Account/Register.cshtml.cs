@@ -98,7 +98,9 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             public string user_name { get; set; }
             public string user_contact { get; set; }
             public string user_address { get; set; }
-            public string CourseId { get; set; }
+            public string pt_ID { get; set; }
+
+            public int course_ID { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CourseList { get; set; }
         }
@@ -137,6 +139,8 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 user.user_name = Input.user_name;
                 user.user_contact = Input.user_contact;
                 user.user_address = Input.user_address;
+                user.pt_ID = Input.pt_ID;
+                user.course_ID = Input.course_ID;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

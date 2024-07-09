@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240709182121_addDB.Designer.cs
-    [Migration("20240709182121_addDB")]
-    partial class addDB
-========
-    [Migration("20240709172343_addDb")]
-    partial class addDb
->>>>>>>> 390c1fbd6dffeda3a761ff371a49d360c48ac36d:ADStarter.DataAccess/Migrations/20240709172343_addDb.Designer.cs
+    [Migration("20240709180131_changedatatype")]
+    partial class changedatatype
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

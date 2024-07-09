@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240709182121_addDB.Designer.cs
-    [Migration("20240709182121_addDB")]
-    partial class addDB
-========
-    [Migration("20240709172343_addDb")]
-    partial class addDb
->>>>>>>> 390c1fbd6dffeda3a761ff371a49d360c48ac36d:ADStarter.DataAccess/Migrations/20240709172343_addDb.Designer.cs
+    [Migration("20240709173135_addTable")]
+    partial class addTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,12 +110,8 @@ namespace ADStarter.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("s_id")
+                    b.Property<int?>("st_id")
                         .HasColumnType("int");
-
-                    b.Property<string>("st_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("p_id");
 
@@ -140,25 +131,21 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("s_SV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("s_SV")
+                        .HasColumnType("int");
 
-                    b.Property<string>("s_SVagreement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("s_SVagreement")
+                        .HasColumnType("bit");
 
                     b.Property<string>("s_academic_session")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("s_evaluator1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("s_evaluator1")
+                        .HasColumnType("int");
 
-                    b.Property<string>("s_evaluator2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("s_evaluator2")
+                        .HasColumnType("int");
 
                     b.Property<string>("s_semester")
                         .IsRequired()
