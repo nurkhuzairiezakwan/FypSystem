@@ -4,6 +4,7 @@ using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240709154908_addcourses")]
+    partial class addcourses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,14 +51,12 @@ namespace ADStarter.DataAccess.Migrations
                         {
                             course_ID = 1,
                             course_code = "SECPH",
-                            course_count = "41",
                             course_desc = "Data Engineering"
                         },
                         new
                         {
                             course_ID = 2,
                             course_code = "SECJ",
-                            course_count = "41",
                             course_desc = "Software Engineering"
                         });
                 });

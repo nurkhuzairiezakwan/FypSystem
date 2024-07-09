@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240708165557_addDb")]
+    [Migration("20240709152732_addDb")]
     partial class addDb
     {
         /// <inheritdoc />
@@ -24,6 +24,44 @@ namespace ADStarter.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ADStarter.Models.Course", b =>
+                {
+                    b.Property<int>("course_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("course_ID"));
+
+                    b.Property<string>("course_code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("course_count")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("course_desc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("course_ID");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("ADStarter.Models.ProjectType", b =>
+                {
+                    b.Property<int>("pt_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pt_ID"));
+
+                    b.Property<string>("pt_desc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("pt_ID");
+
+                    b.ToTable("ProjectTypes");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -89,6 +127,10 @@ namespace ADStarter.DataAccess.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -140,6 +182,10 @@ namespace ADStarter.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -223,6 +269,44 @@ namespace ADStarter.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ADStrater.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<int?>("course_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("pt_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("user_IC")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("user_address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("user_contact")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("user_matric")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("user_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("course_ID");
+
+                    b.HasIndex("pt_ID");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -272,6 +356,21 @@ namespace ADStarter.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ADStrater.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("ADStarter.Models.Course", "course")
+                        .WithMany()
+                        .HasForeignKey("course_ID");
+
+                    b.HasOne("ADStarter.Models.ProjectType", "projecttype")
+                        .WithMany()
+                        .HasForeignKey("pt_ID");
+
+                    b.Navigation("course");
+
+                    b.Navigation("projecttype");
                 });
 #pragma warning restore 612, 618
         }
