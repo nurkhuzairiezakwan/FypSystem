@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240709152732_addDb")]
+    [Migration("20240709172343_addDb")]
     partial class addDb
     {
         /// <inheritdoc />
@@ -45,6 +45,22 @@ namespace ADStarter.DataAccess.Migrations
                     b.HasKey("course_ID");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            course_ID = 1,
+                            course_code = "SECPH",
+                            course_count = "41",
+                            course_desc = "Data Engineering"
+                        },
+                        new
+                        {
+                            course_ID = 2,
+                            course_code = "SECJ",
+                            course_count = "41",
+                            course_desc = "Software Engineering"
+                        });
                 });
 
             modelBuilder.Entity("ADStarter.Models.ProjectType", b =>

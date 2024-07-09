@@ -16,6 +16,8 @@ namespace ADStarter.DataAccess.Data
         public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Proposal> Proposals { get; set; }
+        public DbSet<Student> Students { get; set; }
 
 
 

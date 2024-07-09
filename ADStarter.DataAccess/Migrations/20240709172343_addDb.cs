@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
@@ -200,6 +202,15 @@ namespace ADStarter.DataAccess.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "course_ID", "course_code", "course_count", "course_desc" },
+                values: new object[,]
+                {
+                    { 1, "SECPH", "41", "Data Engineering" },
+                    { 2, "SECJ", "41", "Software Engineering" }
                 });
 
             migrationBuilder.CreateIndex(
