@@ -15,15 +15,47 @@
                         <img class="img-fluid for-dark" src="~/assets/images/logo/logoAD.png" style="width:200px" alt="login page">
                     </a>
                 </div>
-                <div class="login-main">
+                <div class="login-main" style="width:750px">
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="theme-form">
                         <h4>Create your account</h4>
                         <p>Enter your personal details to create an account</p>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                         <div class="form-group">
-                            <label class="col-form-label pt-0">Email </label>
+                            <label class="col-form-label pt-0">Name </label>
+                            <input asp-for="Input.user_name" class="form-control" autocomplete="username" aria-required="true" placeholder="Ali Bin Abu" />
+                            <span asp-validation-for="Input.user_name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">IC</label>
+                            <input asp-for="Input.user_IC" class="form-control" autocomplete="username" aria-required="true" placeholder="123456789012" />
+                            <span asp-validation-for="Input.user_IC" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Matric No.</label>
+                            <input asp-for="Input.user_matric" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <span asp-validation-for="Input.user_matric" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Address</label>
+                            <input asp-for="Input.user_address" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <span asp-validation-for="Input.user_address" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Email</label>
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Contact</label>
+                            <input asp-for="Input.user_contact" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <span asp-validation-for="Input.user_contact" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label pt-0">Course</label>
+                            <select asp-for="Input.CourseId" asp-items="Model.Input.CourseList" class="form-select">
+                                <option disabled selected value="">-Select Course-</option>
+                            </select>
+                            <span asp-validation-for="Input.CourseId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label class="col-form-label pt-0">Password</label>
@@ -51,43 +83,10 @@
                                 </select>
                             </div>
                         @* } *@
-                        
                         <div class="form-group mb-0">
-                            <div class="checkbox p-0">
-                                <input id="checkbox1" type="checkbox">
-                                <label class="text-muted" for="checkbox1">Agree with <a class="ms-2" href="#">Privacy Policy</a></label>
-                            </div>
                             <button id="registerSubmit" type="submit" class="btn btn-primary btn-block w-100">Create Account</button>
                         </div>
                         <h6 class="text-muted mt-4 or">Or sign up with</h6>
-                        <div class="social mt-4">
-                            <div class="btn-showcase">
-                                @{
-                                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                                    {
-                                        <div>
-                                            <p>
-                                                There are no external authentication services configured. See this
-                                                <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article about setting up this ASP.NET application to support logging in via external services</a>.
-                                            </p>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                            <div>
-                                                <p>
-                                                    @foreach (var provider in Model.ExternalLogins!)
-                                                    {
-                                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                                    }
-                                                </p>
-                                            </div>
-                                        </form>
-                                    }
-                                }
-                            </div>
-                        </div>
                         <p class="mt-4 mb-0">
                             Already have an account?
                             <a class="ms-2" asp-page="./Login">Sign in</a>

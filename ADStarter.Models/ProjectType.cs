@@ -1,16 +1,16 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ADStarter.Models
 {
-    public class ProjectType
+    public partial class ProjectType
     {
-        public int pt_id { get; set; }
-        public string pt_desc { get; set; }
+        [Key]
+        public int pt_ID { get; set; }
 
-      
+        public string pt_desc { get; set; } // Change data type to string
+
     }
 }

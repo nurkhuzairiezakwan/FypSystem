@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
@@ -11,7 +12,9 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using ADStarter.DataAccess.Data;
 using ADStarter.Utility;
+using ADStrater.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +38,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ApplicationDBContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -43,7 +47,8 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            ApplicationDBContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -53,6 +58,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
+            _context = context;
         }
 
         [BindProperty]
@@ -83,7 +89,18 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
-            public string Name { get; set; }
+
+            [Required(ErrorMessage = "The IC number is required.")]
+            [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid fill. Must follow IC format.")]
+            [StringLength(100)]
+            public string user_IC { get; set; }
+            public string user_matric { get; set; }
+            public string user_name { get; set; }
+            public string user_contact { get; set; }
+            public string user_address { get; set; }
+            public string CourseId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CourseList { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -98,7 +115,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
             Input = new InputModel();
             PopulateRoles();
-
+            PopulateCourses();
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -115,6 +132,11 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.user_IC = Input.user_IC;
+                user.user_matric = Input.user_matric;
+                user.user_name = Input.user_name;
+                user.user_contact = Input.user_contact;
+                user.user_address = Input.user_address;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -168,14 +190,15 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
             Input = new InputModel();
             PopulateRoles();
+            PopulateCourses();
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
@@ -201,6 +224,14 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 Text = i,
                 Value = i
             });
+        }
+        private void PopulateCourses()
+        {
+            Input.CourseList = _context.Courses.Select(c => new SelectListItem
+            {
+                Value = c.course_ID.ToString(),
+                Text = c.course_desc
+            }).ToList();
         }
     }
 }

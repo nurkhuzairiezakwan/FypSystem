@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,11 @@ namespace ADStarter.Models
 {
     public partial class Proposal
     {
+        [Key]
         public int p_id { get; set; }
 
-        //[DisplayName("Student Involved")]
-        //public Nullable<int> s_id { get; set; }
+       
+        public int s_id { get; set; }
 
         [DisplayName("Title")]
         public string p_title { get; set; }

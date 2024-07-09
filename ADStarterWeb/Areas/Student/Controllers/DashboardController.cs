@@ -2,6 +2,7 @@
 
 namespace ADStarterWeb.Areas.Student.Controllers
 {
+    [Area("Student")]
     public class DashboardController : Controller
     {
         public IActionResult Index()
