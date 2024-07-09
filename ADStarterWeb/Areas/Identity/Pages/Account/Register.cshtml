@@ -52,10 +52,19 @@
                         </div>
                         <div class="form-group">
                             <label class="col-form-label pt-0">Course</label>
-                            <select asp-for="Input.CourseId" asp-items="Model.Input.CourseList" class="form-select">
+                            <select asp-for="Input.course_ID" asp-items="Model.Input.CourseList" class="form-select">
                                 <option disabled selected value="">-Select Course-</option>
                             </select>
-                            <span asp-validation-for="Input.CourseId" class="text-danger"></span>
+                            <span asp-validation-for="Input.course_ID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.pt_ID" class="col-form-label pt-0">Project Type</label>
+                            <select asp-for="Input.pt_ID" class="form-select">
+                                <option disabled selected>Select Domain</option>
+                                <option value="Development">Development</option>
+                                <option value="Research">Research</option>
+                            </select>
+                            <span asp-validation-for="Input.pt_ID" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label class="col-form-label pt-0">Password</label>

@@ -25,11 +25,9 @@ namespace   ADStrater.Models
         public string user_contact { get; set; }
         [DisplayName("Address")]
         public string user_address { get; set; }
-        public int? pt_ID { get; set; }
+        public string pt_ID { get; set; }
         public int? course_ID { get; set; }
 
-        [ForeignKey("pt_ID")]
-        public virtual ProjectType projecttype { get; set; }
         [ForeignKey("course_ID")]
         public virtual Course course { get; set; }
 
