@@ -23,31 +23,6 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <label class="badge badge-light-primary">2</label>
-                        <a class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-home"></use>
-                            </svg>
-                            <span class="lan-3">Dashboard</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
-                            <li><a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" asp-area="Parent" asp-controller="Registration" asp-action="AddNewChild">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
-                            </svg>
-                            <span>Enroll New Child</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
@@ -55,10 +30,9 @@
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Program</span>
+                            <span>Supervisor</span>
                         </a>
                         <ul class="sidebar-submenu">
-                           
                             <li><a asp-area="Parent" asp-controller="Program" asp-action="#">Our Programs</a></li>
                             <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create">Enroll New Program</a></li>
                             <li><a asp-area="Parent" asp-controller="Schedule" asp-action="ViewChildSchedule">Child Schedule</a></li>
@@ -68,37 +42,19 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-task"></use>
+                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-task"></use>
+                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Billing</span>
+                            <span>Evaluator</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Parent" asp-controller="Invoice" asp-action="Index">Invoices</a></li>
-                            <li><a class="nav-link" asp-area="Parent" asp-controller="Payment" asp-action="PaymentHistory">Payment History</a></li>
+                            <li><a asp-area="Parent" asp-controller="Program" asp-action="#">Our Programs</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create">Enroll New Program</a></li>
+                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="ViewChildSchedule">Child Schedule</a></li>
+                            <li><a asp-area="Parent" asp-controller="ParentReport" asp-action="ChildReport">Progress Report</a></li>
                         </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-rolodex" viewBox="0 0 16 16">
-                                <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
-                                <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1z" />
-                            </svg>
-                            <span>Child</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-faq"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-faq"></use>
-                            </svg>
-                            <span>FAQ</span>
-                        </a>
                     </li>
                 </ul>
             </div>

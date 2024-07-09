@@ -21,10 +21,10 @@ namespace ADStarter.Models
         public string p_file { get; set; }
 
         [DisplayName("Evaluation Result")]
-        public int? st_id        { get; set; }
+        public string? st_id { get; set; }
 
         [DisplayName("Supervisor Comment")]
-        public string p_sv_comment         { get; set; }
+        public string p_sv_comment { get; set; }
         [DisplayName("Evaluator 1 Comment")]
         public string p_evaluator1_comment { get; set; }
         [DisplayName("Evaluator 2 Comment")]
