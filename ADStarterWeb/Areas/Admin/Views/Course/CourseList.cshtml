@@ -1,0 +1,130 @@
+﻿@model List<Course>
+@using ADStarter.Models
+@{
+    ViewData["Title"] = "Course List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Course List</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Course</li>
+                        <li class="breadcrumb-item active">Course List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="text-end">
+                            <a href="@Url.Action("Upsert", "Course")" class="btn btn-primary"><i class="icon-plus"></i>Add New</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="display" id="basic-6">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Student Count</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var course in Model)
+                                    {
+                                        <tr>
+                                            <td>@course.course_ID</td>
+                                            <td>@course.course_code</td>
+                                            <td>@course.course_desc</td>
+                                            <td>@course.course_count</td>
+                                            <td>
+                                                <ul class="action">
+                                                    <li class="edit">
+                                                        <a href="@Url.Action("Upsert", "Course", new { area = "Admin", Id = course.course_ID })">
+                                                            <i class="icon-pencil-alt"></i>Update
+                                                        </a>
+                                                    </li>
+                                                    <li class="delete">
+                                                        <a href="javascript:void(0)" class="btnDelete" data-id="@course.course_ID">
+                                                            <i class="icon-trash"></i>Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Complex headers (rowspan and colspan) Ends-->
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#basic-6').DataTable();
+
+            $('.btnDelete').click(function () {
+                var id = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: '@Url.Action("Delete", "Course")/' + id,
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        location.reload(); // Reload the page to reflect the changes
+                                    });
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        response.message,
+                                        'error'
+                                    );
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

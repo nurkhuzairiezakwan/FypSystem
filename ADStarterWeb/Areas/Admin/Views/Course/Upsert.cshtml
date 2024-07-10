@@ -1,0 +1,91 @@
+﻿@model ADStarter.Models.Course
+@{
+    ViewData["Title"] = "Create/Update Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var id = ViewBag.UserId ?? 0;
+}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>@((Model.course_ID != 0) ? "Update" : "Create") Course</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Announcements</li>
+                        <li class="breadcrumb-item active">@((Model.course_ID != 0) ? "Update" : "Create") Course</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="edit-profile">
+            <div class="row">
+                <div class="col-xl-12">
+                    <form method="post" class="card" enctype="multipart/form-data">
+                        <input type="hidden" name="courseId" value="@id" />
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">@((Model.course_ID != 0) ? "Update" : "Create") Course</h4>
+                            <div class="card-options">
+                                <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse">
+                                    <i class="fe fe-chevron-up"></i>
+                                </a>
+                                <a class="card-options-remove" href="#" data-bs-toggle="card-remove">
+                                    <i class="fe fe-x"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="mb-3">
+                                        <label asp-for="course_desc" class="form-label">Name</label>
+                                        <input asp-for="course_desc" class="form-control" placeholder="Course Name" />
+                                        <span asp-validation-for="course_desc" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="course_code" class="form-label">Code</label>
+                                        <input asp-for="course_code" class="form-control" placeholder="Course Code" />
+                                        <span asp-validation-for="course_code" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="course_count" class="form-label">Student Count</label>
+                                        <input asp-for="course_count" class="form-control" placeholder="Count" />
+                                        <span asp-validation-for="course_count" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <button type="submit" class="btn btn-primary">@((Model.course_ID != 0) ? "Update" : "Create")</button>
+                            <a asp-controller="Course" asp-action="CourseList" class="btn btn-outline-primary">Back To List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+@section Scripts {
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
