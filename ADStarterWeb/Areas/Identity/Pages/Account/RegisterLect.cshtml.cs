@@ -14,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ADStarter.DataAccess.Data;
 using ADStarter.Utility;
-using ADStrater.Models;
+using ADStarter.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

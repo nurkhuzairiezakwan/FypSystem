@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addDB : Migration
+    public partial class addDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,19 +43,6 @@ namespace ADStarter.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectTypes",
-                columns: table => new
-                {
-                    pt_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    pt_desc = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectTypes", x => x.pt_ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -81,13 +68,12 @@ namespace ADStarter.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    user_IC = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    user_matric = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    user_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    user_contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    user_address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    pt_ID = table.Column<int>(type: "int", nullable: true),
+                    user_IC = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    user_matric = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    pt_ID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     course_ID = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -112,11 +98,6 @@ namespace ADStarter.DataAccess.Migrations
                         column: x => x.course_ID,
                         principalTable: "Courses",
                         principalColumn: "course_ID");
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_ProjectTypes_pt_ID",
-                        column: x => x.pt_ID,
-                        principalTable: "ProjectTypes",
-                        principalColumn: "pt_ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -204,7 +185,6 @@ namespace ADStarter.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240709182121_addDB.cs
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
@@ -219,7 +199,7 @@ namespace ADStarter.DataAccess.Migrations
                     s_academic_session = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     s_semester = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     s_SVagreement = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,7 +208,8 @@ namespace ADStarter.DataAccess.Migrations
                         name: "FK_Students_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -257,8 +238,6 @@ namespace ADStarter.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-========
->>>>>>>> 390c1fbd6dffeda3a761ff371a49d360c48ac36d:ADStarter.DataAccess/Migrations/20240709172343_addDb.cs
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "course_ID", "course_code", "course_count", "course_desc" },
@@ -304,11 +283,6 @@ namespace ADStarter.DataAccess.Migrations
                 name: "IX_AspNetUsers_course_ID",
                 table: "AspNetUsers",
                 column: "course_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_pt_ID",
-                table: "AspNetUsers",
-                column: "pt_ID");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -360,9 +334,6 @@ namespace ADStarter.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Courses");
-
-            migrationBuilder.DropTable(
-                name: "ProjectTypes");
         }
     }
 }
