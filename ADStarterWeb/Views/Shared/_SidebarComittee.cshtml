@@ -1,7 +1,7 @@
 ﻿<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
     <div>
         <div class="logo-wrapper">
-            <a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="Comittee" asp-controller="Dashboard" asp-action="Index">
                 <img class="img-fluid for-light" src="/assets/images/logo_utm.png" style="width:150px" alt="">
                 <img class="img-fluid for-dark" src="/assets/images/logo/logo_utm.png" style="width:150px" alt="">
             </a>
@@ -9,8 +9,9 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
         <div class="logo-icon-wrapper">
-            <a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">
-                <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
+            <a asp-area="Comittee" asp-controller="Dashboard" asp-action="Index">
+                <img class="img-fluid for-light" src="/assets/images/logo_utm.png" style="width:150px" alt="">
+                <img class="img-fluid for-dark" src="/assets/images/logo/logo_utm.png" style="width:150px" alt="">
             </a>
         </div>
         <nav class="sidebar-main">
@@ -39,31 +40,17 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                        <a class="sidebar-link sidebar-title" asp-area="CustomerService" asp-controller="Manage" asp-action="Index">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Program</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a asp-area="CustomerService" asp-controller="Report" asp-action="PendingReports">Progress Reports</a></li>
-                            <li><a asp-area="CustomerService" asp-controller="ChildSchedule" asp-action="ViewChildSchedule">Schedule</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-faq"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-faq"></use>
-                            </svg>
-                            <span>FAQ</span>
+                            <span>Manage Lecturers and Students</span>
                         </a>
                     </li>
+                   
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

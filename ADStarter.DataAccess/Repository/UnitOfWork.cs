@@ -15,11 +15,13 @@ namespace ADStarter.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDBContext _db;
-        
+        public ICourseRepository Course { get; private set; }
+
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
-            
+            Course = new CourseRepository(_db);
+
         }
 
 

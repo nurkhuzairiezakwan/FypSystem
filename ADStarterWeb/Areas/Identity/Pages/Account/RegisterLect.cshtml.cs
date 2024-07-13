@@ -28,24 +28,24 @@ using Microsoft.Extensions.Logging;
 
 namespace ADStarterWeb.Areas.Identity.Pages.Account
 {
-    public class RegisterModel : PageModel
+    public class RegisterLectModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<RegisterLectModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationDBContext _context;
 
-        public RegisterModel(
+        public RegisterLectModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<RegisterLectModel> logger,
             IEmailSender emailSender,
             IHttpContextAccessor httpContextAccessor,
             ApplicationDBContext context)
