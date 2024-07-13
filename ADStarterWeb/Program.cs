@@ -6,6 +6,7 @@ using ADStarter.DataAccess.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ADStarter.Utility;
 using Stripe;
+using ADStarter.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +16,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
-
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDBContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace   ADStrater.Models
+namespace   ADStarter.Models
 {
     public class ApplicationUser : IdentityUser
     {

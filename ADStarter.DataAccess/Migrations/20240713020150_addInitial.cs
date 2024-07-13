@@ -8,7 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240713020150_addInitial.cs
     public partial class addInitial : Migration
+========
+    public partial class addDb : Migration
+>>>>>>>> main:ADStarter.DataAccess/Migrations/20240713072939_addDb.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,6 +72,7 @@ namespace ADStarter.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240713020150_addInitial.cs
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     user_IC = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     user_matric = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -75,6 +80,14 @@ namespace ADStarter.DataAccess.Migrations
                     user_contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     user_address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pt_ID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+========
+                    user_IC = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    user_matric = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    pt_ID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+>>>>>>>> main:ADStarter.DataAccess/Migrations/20240713072939_addDb.cs
                     course_ID = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -200,7 +213,7 @@ namespace ADStarter.DataAccess.Migrations
                     s_academic_session = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     s_semester = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     s_SVagreement = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,7 +222,8 @@ namespace ADStarter.DataAccess.Migrations
                         name: "FK_Students_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

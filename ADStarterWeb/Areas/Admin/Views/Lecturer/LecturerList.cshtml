@@ -1,93 +1,82 @@
-﻿@{
-    ViewData["Title"] = "Basic DataTable";
+﻿@using ADStarter.Models.ViewModels
+@model List<LecturerVM>
+
+@{
+    ViewData["Title"] = "Lecturer List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="page-body">
     <div class="container-fluid">
-    <div class="page-title">
-        <div class="row">
-        <div class="col-6">
-            <h3>Basic DataTables</h3>
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Account List</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Account</li>
+                        <li class="breadcrumb-item active">Account List</li>
+                    </ol>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Index">                                       
-                <svg class="stroke-icon">
-                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
-                </svg></a></li>
-            <li class="breadcrumb-item">Data Tables</li>
-            <li class="breadcrumb-item active">Basic DataTables</li>
-            </ol>
-        </div>
-        </div>
-    </div>
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-    <div class="row">
-        <!-- Complex headers (rowspan and colspan) Starts-->
-        <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header pb-0 card-no-border">
-                <div class="text-end">
-                    <a href="@Url.Action("Upsert", "Course")" class="btn btn-primary"><i class="icon-plus"></i>Add New</a>
+        <div class="edit-profile">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="table-responsive add-project">
+                            <table class="table card-table table-vcenter text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Matric No.</th>
+                                        <th>Project Type</th>
+                                        <th>Role(s)</th>
+                                        <th></th> <!-- Added for action buttons -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@user.user_name</td>
+                                            <td>@user.user_matric</td>
+                                            <td>@user.pt_ID</td>
+                                            <td>
+                                                @foreach (var role in user.Roles)
+                                                {
+                                                    <span>@role</span>
+                                                    <br />
+                                                }
+                                            </td>
+                                            <td class="text-end">
+                                                @{
+                                                    string detailsAction = user.Roles.Contains("Therapist") ? "AddTherapistDetails" : "AddCustomerServiceDetails";
+                                                }
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action(detailsAction, "UserList", new { area = "Admin", userId = user.user_matric })">
+                                                    <i class="fa fa-pencil"></i>Add/Manage Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
-            <div class="table-responsive">
-                <table class="display" id="basic-6">
-                <thead>
-                    <tr>
-                    <th rowspan="2">Name</th>
-                    <th colspan="2">HR Information</th>
-                    <th colspan="3">Contact</th>
-                    </tr>
-                    <tr>
-                    <th>Position</th>
-                    <th>Salary</th>
-                    <th>Office</th>
-                    <th>CV</th>
-                    <th>Status</th>
-                    <th>E-mail</th>
-                    <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>Donna Snider</td>
-                    <td>Customer Support</td>
-                    <td>$112,000</td>
-                    <td>New York</td>
-                    <td class="action">                                  <a class="pdf" href="~/assets/pdf/sample.pdf" target="_blank"><i class="icofont icofont-file-pdf"> </i></a></td>
-                    <td> <span class="badge rounded-pill badge-success">hired</span></td>
-                    <td>d.snider@datatables.net</td>
-                    <td> 
-                        <ul class="action"> 
-                        <li class="edit"> <a href="#"><i class="icon-pencil-alt"></i></a></li>
-                        <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                        </ul>
-                    </td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>
-            </div>
         </div>
-        </div>
-        <!-- Complex headers (rowspan and colspan) Ends-->
-    </div>
     </div>
     <!-- Container-fluid Ends-->
 </div>
-@section Scripts{
-    <!-- Plugins JS start-->
-    <script src="../assets/js/sidebar-menu.js"></script>
-    <script src="../assets/js/slick/slick.min.js"></script>
-    <script src="../assets/js/slick/slick.js"></script>
-    <script src="../assets/js/header-slick.js"></script>
-    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-}
