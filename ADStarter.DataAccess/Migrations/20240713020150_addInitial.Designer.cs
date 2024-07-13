@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240709182121_addDB.Designer.cs
-    [Migration("20240709182121_addDB")]
-    partial class addDB
-========
-    [Migration("20240709172343_addDb")]
-    partial class addDb
->>>>>>>> 390c1fbd6dffeda3a761ff371a49d360c48ac36d:ADStarter.DataAccess/Migrations/20240709172343_addDb.Designer.cs
+    [Migration("20240713020150_addInitial")]
+    partial class addInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,22 +63,6 @@ namespace ADStarter.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ADStarter.Models.ProjectType", b =>
-                {
-                    b.Property<int>("pt_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pt_ID"));
-
-                    b.Property<string>("pt_desc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("pt_ID");
-
-                    b.ToTable("ProjectTypes");
-                });
-
             modelBuilder.Entity("ADStarter.Models.Proposal", b =>
                 {
                     b.Property<int>("p_id")
@@ -119,7 +98,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("st_id")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("p_id");
@@ -392,8 +370,9 @@ namespace ADStarter.DataAccess.Migrations
                     b.Property<int?>("course_ID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("pt_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("pt_ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("user_IC")
                         .IsRequired()
@@ -417,8 +396,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("course_ID");
-
-                    b.HasIndex("pt_ID");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -500,13 +477,7 @@ namespace ADStarter.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("course_ID");
 
-                    b.HasOne("ADStarter.Models.ProjectType", "projecttype")
-                        .WithMany()
-                        .HasForeignKey("pt_ID");
-
                     b.Navigation("course");
-
-                    b.Navigation("projecttype");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Student", b =>

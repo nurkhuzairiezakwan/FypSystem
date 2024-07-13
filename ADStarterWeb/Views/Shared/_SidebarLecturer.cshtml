@@ -9,7 +9,7 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"></i></div>
         </div>
         <div class="logo-icon-wrapper">
-            <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="Lecturer" asp-controller="Dashboard" asp-action="Index">
                 <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
             </a>
         </div>
@@ -23,7 +23,7 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Lecturer" asp-controller="Supervisor" asp-action="StudentList">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
@@ -32,15 +32,9 @@
                             </svg>
                             <span>Supervisor</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a asp-area="Parent" asp-controller="Program" asp-action="#">Our Programs</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create">Enroll New Program</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="ViewChildSchedule">Child Schedule</a></li>
-                            <li><a asp-area="Parent" asp-controller="ParentReport" asp-action="ChildReport">Progress Report</a></li>
-                        </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Lecturer" asp-controller="Evaluator" asp-action="ProposalList">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
@@ -49,12 +43,6 @@
                             </svg>
                             <span>Evaluator</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a asp-area="Parent" asp-controller="Program" asp-action="#">Our Programs</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="Create">Enroll New Program</a></li>
-                            <li><a asp-area="Parent" asp-controller="Schedule" asp-action="ViewChildSchedule">Child Schedule</a></li>
-                            <li><a asp-area="Parent" asp-controller="ParentReport" asp-action="ChildReport">Progress Report</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
