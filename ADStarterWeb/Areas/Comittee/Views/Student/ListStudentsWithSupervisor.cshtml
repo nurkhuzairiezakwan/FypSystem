@@ -1,0 +1,66 @@
+﻿@model List<ADStarter.Models.ViewModels.StudentAssignmentViewModel>
+
+@{
+    ViewData["Title"] = "List of Students with Supervisor";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Replace with your layout path
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h3>List of Students with Supervisor</h3>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="studentTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Project Type</th>
+                                <th>Supervisor Name</th>
+                                <th>Evaluator 1</th>
+                                <th>Evaluator 2</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var student in Model)
+                            {
+                                <tr>
+                                    <td>@student.StudentId</td>
+                                    <td>@student.StudentName</td>
+                                    <td>@student.ProjectType</td>
+                                    <td>@student.SupervisorName</td>
+                                    <td>
+                                        <select asp-for="@student.Evaluator1Id" class="form-control">
+                                            @foreach (var evaluator in student.AvailableEvaluators)
+                                            {
+                                                <option value="@evaluator">@evaluator</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select asp-for="@student.Evaluator2Id" class="form-control">
+                                            @foreach (var evaluator in student.AvailableEvaluators)
+                                            {
+                                                <option value="@evaluator">@evaluator</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <a asp-action="AssignEvaluators" asp-route-studentId="@student.StudentId" class="btn btn-primary">Assign Evaluators</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ADStarter.Models.ViewModels.ProposalAssignmentViewModel>
+
+@{
+    ViewData["Title"] = "Proposals";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Adjust path to your layout
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Proposals</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Proposal Management</li>
+                        <li class="breadcrumb-item active">Proposals</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Title</th>
+                                <th>File</th>
+                                <th>Status</th>
+                                <th>Supervisor</th>
+                                <th>Evaluator 1</th>
+                                <th>Evaluator 2</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var proposal in Model)
+                            {
+                                <tr>
+                                    <td>@proposal.StudentName</td>
+                                    <td>@proposal.p_title</td>
+                                    <td>
+                                        <a href="@Url.Content("~/uploads/" + proposal.p_file)" target="_blank">Download</a>
+                                    </td>
+                                    <td>@proposal.st_id</td>
+                                    <td>@proposal.s_SV</td>
+                                    <td>@proposal.s_evaluator1</td>
+                                    <td>@proposal.s_evaluator2</td>
+                                    <td>
+                                        <a href="@Url.Action("AssignEvaluators", "Proposal", new { area = "Comittee", proposalId = proposal.p_id })" class="btn btn-primary">Assign Evaluators</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

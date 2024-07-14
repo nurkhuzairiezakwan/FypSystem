@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240713072939_addDb")]
-    partial class addDb
+    [Migration("20240714085207_MakeStudentPropertiesNullable")]
+    partial class MakeStudentPropertiesNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,11 +216,9 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("s_SV")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_SVagreement")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_academic_session")
@@ -228,11 +226,9 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_semester")
@@ -240,11 +236,9 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_statusSV")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_user")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("s_id");

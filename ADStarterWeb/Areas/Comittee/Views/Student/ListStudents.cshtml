@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ADStarter.Models.ViewModels.StudentStatusUpdateViewModel>
+
+@{
+    ViewData["Title"] = "Students";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Adjust path to your layout
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Students</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">User Management</li>
+                        <li class="breadcrumb-item active">Students</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Matric Number</th>
+                                <th>Full Name</th>
+                                <th>Supervisor</th>
+                                <th>Status SV</th>
+                                <th>Academic Session</th>
+                                <th>Semester</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var student in Model)
+                            {
+                                <tr>
+                                    <td>@student.UserMatric</td>
+                                    <td>@student.UserName</td>
+                                    <td>@student.s_SV</td>
+                                    <td>@student.s_statusSV</td>
+                                    <td>@student.s_academic_session</td>
+                                    <td>@student.s_semester</td>
+                                    <td>
+                                        <a href="@Url.Action("UpdateStatus", "Student", new { area = "Comittee", studentId = @student.s_id })" class="btn btn-primary">Update Status</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

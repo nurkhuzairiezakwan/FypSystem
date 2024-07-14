@@ -1,0 +1,76 @@
+﻿@model ADStarter.Models.ViewModels.UserRolesViewModel
+
+@{
+    ViewData["Title"] = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Edit User</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">User Management</li>
+                        <li class="breadcrumb-item"><a asp-area="Comittee" asp-controller="UserList" asp-action="List">User List</a></li>
+                        <li class="breadcrumb-item active">Edit User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <form asp-area="Comittee" asp-controller="UserList" asp-action="Edit" method="post">
+
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        <label for="user_matric">Matric Number</label>
+                        <input type="text" id="user_matric" name="user_matric" class="form-control" value="@Model.user_matric" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_name">Full Name</label>
+                        <input type="text" id="user_name" name="user_name" class="form-control" value="@Model.user_name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="pt_ID">Project Type</label>
+                        <select id="pt_ID" name="pt_ID" class="form-control">
+                            <option value="Development" @(Model.pt_ID == "Development" ? "selected" : "")>Development</option>
+                            <option value="Research" @(Model.pt_ID == "Research" ? "selected" : "")>Research</option>
+                        </select>
+                        <small class="form-text text-muted">Select "Development" or "Research" or leave as is.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_desc">Course ID</label>
+                        <input type="text" id="course_desc" name="course_desc" class="form-control" value="@Model.course_desc" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="roles">Roles</label>
+                        @foreach (var role in Model.roles)
+                        {
+                            <input type="text" id="roles" name="roles" class="form-control" value="@role" readonly>
+                        }
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+
+                    <a href="@Url.Action("Index", "Dashboard")" class="btn btn-secondary">Cancel</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ using ADStarter.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240713085809_addDB")]
+    partial class addDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,9 +216,11 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("s_SV")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_SVagreement")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_academic_session")
@@ -223,9 +228,11 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator2")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_semester")
@@ -233,9 +240,11 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_statusSV")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_user")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("s_id");

@@ -39,18 +39,40 @@
                             <li><a asp-area="CustomerService" asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
                         </ul>
                     </li>
+
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" asp-area="CustomerService" asp-controller="Manage" asp-action="Index">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Manage Lecturers and Students</span>
+                            <span>Manage User</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Comittee" asp-controller="UserList" asp-action="ListLecturers">List of Lecturers</a></li>
+                            <li><a asp-area="Comittee" asp-controller="UserList" asp-action="ListStudents">List of Student</a></li>
+                            <li><a asp-area="Comittee" asp-controller="Student" asp-action="ListStudents">Manage Student Supervisor</a></li>
+                        </ul>
                     </li>
-                   
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
+                            </svg>
+                            <span>Manage Proposal</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Comittee" asp-controller="Proposal" asp-action="List">List Proposal</a></li>
+                            <li><a asp-area="Comittee" asp-controller="Proposal" asp-action="ListProposals">List pending Proposal</a></li>
+                        </ul>
+                    </li>
+    
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

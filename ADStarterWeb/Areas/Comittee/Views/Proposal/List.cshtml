@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ADStarter.Models.Proposal>
+
+@{
+    ViewData["Title"] = "List of Proposals";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Replace with your layout path
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h3>List of Proposals</h3>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="proposalTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Proposal ID</th>
+                                <th>Title</th>
+                                <th>Proposal File</th>
+                                <th>Evaluation Result</th>
+                                <th>Supervisor Comment</th>
+                                <th>Evaluator 1 Comment</th>
+                                <th>Evaluator 2 Comment</th>
+                                <th>Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var proposal in Model)
+                            {
+                                <tr>
+                                    <td>@proposal.p_id</td>
+                                    <td>@proposal.p_title</td>
+                                    <td>@proposal.p_file</td>
+                                    <td>@proposal.st_id</td>
+                                    <td>@proposal.p_sv_comment</td>
+                                    <td>@proposal.p_evaluator1_comment</td>
+                                    <td>@proposal.p_evaluator2_comment</td>
+                                    <td>@proposal.Student.User.user_name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+   
+    <script>
+        $(document).ready(function () {
+            $('#proposalTable').DataTable();
+        });
+    </script>
+}
