@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,6 @@ namespace ADStarter.Models
     {
         [Key]
         public int p_id { get; set; }
-
-       
-        public int s_id { get; set; }
 
         [DisplayName("Title")]
         public string p_title { get; set; }
@@ -32,6 +30,9 @@ namespace ADStarter.Models
         [DisplayName("Evaluator 2 Comment")]
         public string p_evaluator2_comment { get; set; }
 
-        public Student Student { get; set; }
+        public int s_id { get; set; }
+        
+        [ForeignKey("s_id")]
+        public virtual Student Student { get; set; }
     }
 }

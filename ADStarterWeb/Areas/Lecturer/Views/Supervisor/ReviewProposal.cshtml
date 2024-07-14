@@ -1,0 +1,57 @@
+@model ADStarter.Models.Proposal
+
+@{
+    ViewData["Title"] = "Proposal Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var filePath = Url.Content($"~/uploads/{Model.p_file}");
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Review Proposal</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Supervisor</li>
+                        <li class="breadcrumb-item active">Review Proposal</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h4>Proposal Title: @Model.p_title</h4>
+                <p>Proposal File: </p>
+                <div class="pdf-viewer">
+                    <iframe src="@filePath" width="75%" height="600px">
+                        This browser does not support PDFs. Please download the PDF to view it: <a href="@filePath">Download PDF</a>
+                    </iframe>
+                </div>
+                <h5>Supervisor Comment</h5>
+                <form asp-action="AddSupervisorComment" method="post">
+                    <input type="hidden" name="id" value="@Model.p_id" />
+                    <textarea name="comment" class="form-control">@Model.p_sv_comment</textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Save Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

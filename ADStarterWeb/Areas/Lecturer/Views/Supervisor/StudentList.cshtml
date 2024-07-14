@@ -1,17 +1,17 @@
-@model IEnumerable<ADStarter.Models.Student>
+@using ADStarter.Models.ViewModels
+@model List<StudentVM>
 
 @{
     ViewData["Title"] = "Student List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
                     <h3>Student List</h3>
-                </div>
-                <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a asp-controller="Dashboard" asp-action="Index">
@@ -33,8 +33,28 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 card-no-border">
-                        <div class="text-end">
-                            <!-- You can add buttons here if needed -->
+                        <div class="row">
+                            @* <div class="col-md-4">
+                                <select id="semesterFilter" class="form-control">
+                                    <option value="">Select Semester</option>
+                                    @foreach (var semester in ViewBag.Semesters as IEnumerable<string>)
+                                    {
+                                        <option value="@semester">@semester</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="academicSessionFilter" class="form-control">
+                                    <option value="">Select Academic Session</option>
+                                    @foreach (var session in ViewBag.AcademicSessions as IEnumerable<string>)
+                                    {
+                                        <option value="@session">@session</option>
+                                    }
+                                </select>
+                            </div> 
+                            <div class="col-md-4">
+                                <button id="filterButton" class="btn btn-primary">Filter</button>
+                            </div>*@
                         </div>
                     </div>
                     <div class="card-body">
@@ -54,13 +74,14 @@
                                     @foreach (var student in Model)
                                     {
                                         <tr>
-                                            <td>@student.User.user_matric</td>
-                                            <td>@student.User.user_name</td>
-                                            <td>@student.User.user_contact</td>
+                                            <td>@student.user_matric</td>
+                                            <td>@student.user_name</td>
+                                            <td>@student.user_contact</td>
                                             <td>@student.s_semester</td>
                                             <td>@student.s_academic_session</td>
-                                            <td> 
-                                                <a href="@Url.Action("ProposalDetails", new { id = student.s_id })" class="btn btn-primary">View Proposal</a>
+                                            <td>
+                                                <a href="@Url.Action("ReviewProposal", new { id = student?.s_id })" class="btn btn-primary">Review</a>
+                                                <a href="@Url.Action("EvaluationDetails", new { id = student?.s_id })" class="btn btn-primary">Evaluation</a>
                                             </td>
                                         </tr>
                                     }
@@ -75,10 +96,17 @@
     <!-- Container-fluid Ends-->
 </div>
 
-@section Scripts{
-    <script>
+@section Scripts {
+    @* <script>
         $(document).ready(function () {
             $('#basic-6').DataTable();
+
+            $('#filterButton').click(function () {
+                var semester = $('#semesterFilter').val();
+                var academicSession = $('#academicSessionFilter').val();
+                var url = '@Url.Action("StudentList", "Supervisor")' + '?semester=' + semester + '&academicSession=' + academicSession;
+                window.location.href = url;
+            });
         });
-    </script>
+    </script> *@
 }

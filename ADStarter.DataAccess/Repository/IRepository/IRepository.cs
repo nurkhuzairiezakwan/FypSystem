@@ -13,6 +13,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
         T GetFirstOrDefault(Expression<Func<T, bool>> filter, string includeProperties = null);
         IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null);
         IEnumerable<T> GetAll();
+        IEnumerable<T> GetAllWithIncludes(params Expression<Func<T, object>>[] includes);
         T Get(Expression<Func<T, bool>> filter);
         T GetFirstOrDefault(Expression<Func<T, bool>> filter); // Add this line
         void Add(T entity);

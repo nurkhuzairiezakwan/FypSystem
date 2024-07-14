@@ -97,6 +97,16 @@ namespace ADStarter.DataAccess.Repository
             return query.ToList();
         }
 
+        public IEnumerable<T> GetAllWithIncludes(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = dbSet;
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+            return query.ToList();
+        }
+
     }
 
 }
