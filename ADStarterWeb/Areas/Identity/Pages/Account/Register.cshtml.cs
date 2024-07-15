@@ -104,7 +104,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Lecturer)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Comittee)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Committee)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Student)).GetAwaiter().GetResult();
             }
 
@@ -123,6 +123,44 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                var existingUserByIC = _context.Users.FirstOrDefault(u => u.user_IC == Input.user_IC);
+                if (existingUserByIC != null)
+                {
+                    ModelState.AddModelError("Input.user_IC", "IC number is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                var existingUserByMatric = _context.Users.FirstOrDefault(u => u.user_matric == Input.user_matric);
+                if (existingUserByMatric != null)
+                {
+                    ModelState.AddModelError("Input.user_matric", "Matric number is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                var existingUserByEmail = await _userManager.FindByEmailAsync(Input.Email);
+                if (existingUserByEmail != null)
+                {
+                    ModelState.AddModelError("Input.Email", "Email is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                var existingUserByPhone = _context.Users.FirstOrDefault(u => u.user_contact == Input.user_contact);
+                if (existingUserByPhone != null)
+                {
+                    ModelState.AddModelError("Input.user_contact", "Phone number is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                
+
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

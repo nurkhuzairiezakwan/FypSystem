@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addDb : Migration
+    public partial class AddDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,8 +73,8 @@ namespace ADStarter.DataAccess.Migrations
                     user_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     user_contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     user_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    pt_ID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    course_ID = table.Column<int>(type: "int", nullable: true),
+                    pt_ID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    course_ID = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -97,7 +97,8 @@ namespace ADStarter.DataAccess.Migrations
                         name: "FK_AspNetUsers_Courses_course_ID",
                         column: x => x.course_ID,
                         principalTable: "Courses",
-                        principalColumn: "course_ID");
+                        principalColumn: "course_ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

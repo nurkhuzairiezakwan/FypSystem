@@ -9,6 +9,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
 {
     public interface ICourseRepository : IRepository<Course>
     {
+        Task<Course> GetByIdAsync(int id);
         void Update(Course obj);
     }
 }

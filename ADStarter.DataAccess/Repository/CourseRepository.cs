@@ -1,6 +1,7 @@
 ﻿using ADStarter.DataAccess.Data;
 using ADStarter.DataAccess.Repository.IRepository;
 using ADStarter.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace ADStarter.DataAccess.Repository
         public void Update(Course obj)
         {
             _db.Courses.Update(obj);
+        }
+        public async Task<Course> GetByIdAsync(int id)
+        {
+            return await _db.Courses.FindAsync(id);
         }
 
     }

@@ -74,11 +74,10 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int?>("course_ID")
+                    b.Property<int>("course_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("pt_ID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("user_IC")
@@ -388,7 +387,9 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Course", "course")
                         .WithMany()
-                        .HasForeignKey("course_ID");
+                        .HasForeignKey("course_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("course");
                 });

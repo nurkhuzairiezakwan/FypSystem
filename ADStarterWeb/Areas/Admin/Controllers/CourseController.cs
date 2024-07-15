@@ -11,10 +11,10 @@ namespace ADStarterWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDBContext _db;
 
-        public CourseController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager, ApplicationDBContext db)
+        public CourseController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager, ApplicationDBContext db)
         {
             _webHostEnvironment = webHostEnvironment;
             _unitOfWork = unitOfWork;
@@ -37,9 +37,9 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             else
             {
                 course = _unitOfWork.Course.Get(u => u.course_ID == Id);
+                ViewBag.UserId = Id ?? 0;
                 return View(course);
             }
-            ViewBag.UserId = Id ?? 0;
             return View(course);
         }
         [HttpPost]

@@ -148,7 +148,7 @@
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div">
-                            @if (User.IsInRole(SD.Role_Comittee))
+                            @if (User.IsInRole(SD.Role_Committee))
                             {
                                 <li><a asp-area="Parent" asp-controller="Registration" asp-action="UserEdit"><i data-feather="user"></i><span>Account </span></a></li>
                             }@if (User.IsInRole(SD.Role_Admin))
