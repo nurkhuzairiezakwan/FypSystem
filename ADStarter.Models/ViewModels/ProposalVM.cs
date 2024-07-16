@@ -16,6 +16,7 @@ namespace ADStarter.Models.ViewModels
         public string p_evaluator1_comment { get; set; }
         public string p_evaluator2_comment { get; set; }
         public string pt_ID { get; set; }
+        public string user_name { get; set; }
         public int s_id { get; set; }
         public string s_user { get; set; }
         public string s_evaluator1 { get; set; }

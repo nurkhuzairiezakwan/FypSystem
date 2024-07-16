@@ -23,16 +23,16 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
         public async Task<IActionResult> ProposalList()
         {
             var userId = _userManager.GetUserId(User);
-
             var users = _userManager.Users.ToList();
-            var proposalVM = new List<ProposalVM>();       
+            var proposalVM = new List<ProposalVM>();
+            var evaluatorNames = users.ToDictionary(u => u.Id, u => u.user_name);
 
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Contains("Student"))
                 {
-                    var student = _unitOfWork.Students.Get(s => (s.s_evaluator1 == userId || s.s_evaluator2 == userId) && s.Id == user.Id);                    
+                    var student = _unitOfWork.Students.Get(s => (s.s_evaluator1 == userId || s.s_evaluator2 == userId) && s.Id == user.Id);
                     if (student != null)
                     {
                         var proposal = _unitOfWork.Proposals.Get(p => p.s_id == student.s_id);
@@ -41,8 +41,8 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
                             p_id = proposal.p_id,
                             s_id = student.s_id,
                             s_user = student.s_user,
-                            s_evaluator1 = student.s_evaluator1,
-                            s_evaluator2 = student.s_evaluator2,
+                            s_evaluator1 = evaluatorNames.ContainsKey(student.s_evaluator1) ? evaluatorNames[student.s_evaluator1] : student.s_evaluator1,
+                            s_evaluator2 = evaluatorNames.ContainsKey(student.s_evaluator2) ? evaluatorNames[student.s_evaluator2] : student.s_evaluator2,
                             s_SV = student.s_SV,
                             st_id = proposal?.st_id,
                             p_evaluator1_comment = proposal?.p_evaluator1_comment,
