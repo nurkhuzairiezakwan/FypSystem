@@ -13,7 +13,7 @@ namespace ADStarter.Models.ViewModels
         public string s_evaluator1 { get; set; }
         public string s_evaluator2 { get; set; }
         public string s_SV { get; set; }
-        public string s_statusSV { get; set; } // Nullable
+        public string s_statusSV { get; set; } 
         public string s_academic_session { get; set; }
         public string s_semester { get; set; }
         public string s_SVagreement { get; set; }
@@ -21,5 +21,6 @@ namespace ADStarter.Models.ViewModels
         public string user_matric { get; set; }
         public string user_name { get; set; }
         public string user_contact { get; set; }
+        public string st_id { get; set; } 
     }
 }

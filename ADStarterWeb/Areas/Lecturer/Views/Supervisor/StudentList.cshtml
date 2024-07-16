@@ -12,6 +12,8 @@
             <div class="row">
                 <div class="col-6">
                     <h3>Student List</h3>
+                </div>
+                <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a asp-controller="Dashboard" asp-action="Index">
@@ -24,37 +26,11 @@
                         <li class="breadcrumb-item active">Student List</li>
                     </ol>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Container-fluid starts-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
                     <div class="card-header pb-0 card-no-border">
                         <div class="row">
-                            @* <div class="col-md-4">
-                                <select id="semesterFilter" class="form-control">
-                                    <option value="">Select Semester</option>
-                                    @foreach (var semester in ViewBag.Semesters as IEnumerable<string>)
-                                    {
-                                        <option value="@semester">@semester</option>
-                                    }
-                                </select>
+                            <div class="col-12 text-right">
+                                <p class="text-muted">e.g. search by academic session / semester / status</p>
                             </div>
-                            <div class="col-md-4">
-                                <select id="academicSessionFilter" class="form-control">
-                                    <option value="">Select Academic Session</option>
-                                    @foreach (var session in ViewBag.AcademicSessions as IEnumerable<string>)
-                                    {
-                                        <option value="@session">@session</option>
-                                    }
-                                </select>
-                            </div> 
-                            <div class="col-md-4">
-                                <button id="filterButton" class="btn btn-primary">Filter</button>
-                            </div>*@
                         </div>
                     </div>
                     <div class="card-body">
@@ -67,6 +43,7 @@
                                         <th>Contact</th>
                                         <th>Semester</th>
                                         <th>Academic Session</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -79,9 +56,16 @@
                                             <td>@student.user_contact</td>
                                             <td>@student.s_semester</td>
                                             <td>@student.s_academic_session</td>
+                                            <td>@student.st_id</td>
                                             <td>
-                                                <a href="@Url.Action("ReviewProposal", new { id = student?.s_id })" class="btn btn-primary">Review</a>
-                                                <a href="@Url.Action("EvaluationDetails", new { id = student?.s_id })" class="btn btn-primary">Evaluation</a>
+                                                @if (student.st_id == "Pending")
+                                                {
+                                                    <a href="@Url.Action("ReviewProposal", new { id = student?.s_id })" class="btn btn-primary">Review</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("EvaluationDetails", new { id = student?.s_id })" class="btn btn-primary">Evaluation</a>
+                                                }
                                             </td>
                                         </tr>
                                     }
@@ -97,16 +81,4 @@
 </div>
 
 @section Scripts {
-    @* <script>
-        $(document).ready(function () {
-            $('#basic-6').DataTable();
-
-            $('#filterButton').click(function () {
-                var semester = $('#semesterFilter').val();
-                var academicSession = $('#academicSessionFilter').val();
-                var url = '@Url.Action("StudentList", "Supervisor")' + '?semester=' + semester + '&academicSession=' + academicSession;
-                window.location.href = url;
-            });
-        });
-    </script> *@
 }

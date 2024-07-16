@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Proposal Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var filePath = Url.Content($"~/uploads/{Model.p_file}");
 }
 
 <div class="page-body">
@@ -33,13 +34,16 @@
         <div class="row">
             <div class="col-12">
                 <h4>Proposal Title: @Model.p_title</h4>
-                <p>Proposal File: <a href="@Model.p_file" target="_blank">Download</a></p>
+                <div class="pdf-viewer">
+                    <iframe src="@filePath" width="75%" height="600px">
+                        This browser does not support PDFs. Please download the PDF to view it: <a href="@filePath">Download PDF</a>
+                    </iframe>
+                </div>
+                <h5>Proposal Status</h5>
+                <p>@Model.st_id</p>
+
                 <h5>Supervisor Comment</h5>
-                <form asp-action="AddSupervisorComment" method="post">
-                    <input type="hidden" name="id" value="@Model.p_id" />
-                    <textarea name="comment" class="form-control">@Model.p_sv_comment</textarea>
-                    <button type="submit" class="btn btn-primary mt-2">Save Comment</button>
-                </form>
+                <p>@Model.p_sv_comment</p>  
                 <h5>Evaluator 1 Comment</h5>
                 <p>@Model.p_evaluator1_comment</p>
                 <h5>Evaluator 2 Comment</h5>
@@ -51,5 +55,4 @@
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

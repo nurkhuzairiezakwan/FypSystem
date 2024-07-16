@@ -41,7 +41,7 @@
                     </iframe>
                 </div>
                 <h5>Supervisor Comment</h5>
-                <form asp-action="AddSupervisorComment" method="post">
+                <form asp-action="ReviewProposal" method="post">
                     <input type="hidden" name="id" value="@Model.p_id" />
                     <textarea name="comment" class="form-control">@Model.p_sv_comment</textarea>
                     <button type="submit" class="btn btn-primary mt-2">Save Comment</button>
@@ -53,5 +53,4 @@
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
 }
