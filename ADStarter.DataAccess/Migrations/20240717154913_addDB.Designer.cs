@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240714085207_MakeStudentPropertiesNullable")]
-    partial class MakeStudentPropertiesNullable
+    [Migration("20240717154913_addDB")]
+    partial class addDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,11 +77,10 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int?>("course_ID")
+                    b.Property<int>("course_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("pt_ID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("user_IC")
@@ -222,7 +221,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_academic_session")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator1")
@@ -232,7 +230,6 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_semester")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_statusSV")
@@ -385,7 +382,9 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Course", "course")
                         .WithMany()
-                        .HasForeignKey("course_ID");
+                        .HasForeignKey("course_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("course");
                 });
