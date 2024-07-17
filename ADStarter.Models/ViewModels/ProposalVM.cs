@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 using System;
+=======
+﻿using System;
+>>>>>>> Student
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +12,10 @@ namespace ADStarter.Models.ViewModels
 {
     public class ProposalVM
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Student
         public int p_id { get; set; }
         public string p_title { get; set; }
         public string p_file { get; set; }

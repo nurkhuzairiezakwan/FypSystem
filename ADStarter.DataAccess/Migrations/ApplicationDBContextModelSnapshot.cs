@@ -163,12 +163,16 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("p_id"));
 
+<<<<<<< HEAD
+=======
+                    b.Property<bool>("IsResubmission")
+                        .HasColumnType("bit");
+
+>>>>>>> Student
                     b.Property<string>("p_evaluator1_comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_evaluator2_comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_file")
@@ -176,18 +180,23 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_sv_comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("s_id")
+                    b.Property<int?>("s_id")
                         .HasColumnType("int");
 
                     b.Property<string>("st_id")
+<<<<<<< HEAD
                         .HasColumnType("nvarchar(max)");
+=======
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Rejected");
+>>>>>>> Student
 
                     b.HasKey("p_id");
 
@@ -204,46 +213,47 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("s_id"));
 
+<<<<<<< HEAD
                     b.Property<string>("Id")
+=======
+                    b.Property<string>("User")
+>>>>>>> Student
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_SV")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_SVagreement")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_academic_session")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_semester")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_statusSV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Pending");
 
                     b.Property<string>("s_user")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("s_id");
 
+<<<<<<< HEAD
                     b.HasIndex("Id");
 
+=======
+>>>>>>> Student
                     b.ToTable("Students");
                 });
 
@@ -393,13 +403,18 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Student", "Student")
                         .WithMany("Proposals")
+<<<<<<< HEAD
                         .HasForeignKey("s_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+=======
+                        .HasForeignKey("s_id");
+>>>>>>> Student
 
                     b.Navigation("Student");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("ADStarter.Models.Student", b =>
                 {
                     b.HasOne("ADStarter.Models.ApplicationUser", "ApplicationUser")
@@ -411,6 +426,8 @@ namespace ADStarter.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+=======
+>>>>>>> Student
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

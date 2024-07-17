@@ -27,6 +27,7 @@ namespace ADStarter.Models
 
         [ForeignKey("Id")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public string User { get; set; }
 
         // Navigation properties
         public ICollection<Proposal> Proposals { get; set; }

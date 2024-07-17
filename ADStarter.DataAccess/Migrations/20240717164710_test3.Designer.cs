@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240713081236_addInitial.Designer.cs
-    [Migration("20240713081236_addInitial")]
-    partial class addInitial
-========
-    [Migration("20240717154040_test1")]
-    partial class test1
->>>>>>>> Student:ADStarter.DataAccess/Migrations/20240717154040_test1.Designer.cs
+    [Migration("20240717164710_test3")]
+    partial class test3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -171,12 +166,9 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("p_id"));
 
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240713081236_addInitial.Designer.cs
-========
                     b.Property<bool>("IsResubmission")
                         .HasColumnType("bit");
 
->>>>>>>> Student:ADStarter.DataAccess/Migrations/20240717154040_test1.Designer.cs
                     b.Property<string>("p_evaluator1_comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -198,13 +190,9 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("st_id")
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240713081236_addInitial.Designer.cs
-                        .HasColumnType("nvarchar(max)");
-========
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Accepted with Conditions");
->>>>>>>> Student:ADStarter.DataAccess/Migrations/20240717154040_test1.Designer.cs
+                        .HasDefaultValue("Rejected");
 
                     b.HasKey("p_id");
 
@@ -402,13 +390,7 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Student", "Student")
                         .WithMany("Proposals")
-<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240713081236_addInitial.Designer.cs
-                        .HasForeignKey("s_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-========
                         .HasForeignKey("s_id");
->>>>>>>> Student:ADStarter.DataAccess/Migrations/20240717154040_test1.Designer.cs
 
                     b.Navigation("Student");
                 });
