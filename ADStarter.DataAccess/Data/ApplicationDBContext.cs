@@ -28,6 +28,14 @@ namespace ADStarter.DataAccess.Data
 
                 );
 
+            modelBuilder.Entity<Student>()
+                .Property(s => s.s_statusSV)
+                .HasDefaultValue("Pending");
+
+            modelBuilder.Entity<Proposal>()
+                .Property(p => p.st_id)
+                .HasDefaultValue("Rejected");
+
         }
     }
 }

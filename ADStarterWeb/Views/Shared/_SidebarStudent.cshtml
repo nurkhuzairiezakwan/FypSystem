@@ -1,15 +1,15 @@
 ﻿<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
     <div>
         <div class="logo-wrapper">
-            <a asp-area="Therapist" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="Parent" asp-controller="Dashboard" asp-action="Index">
                 <img class="img-fluid for-light" src="/assets/images/logo_utm.png" style="width:150px" alt="">
                 <img class="img-fluid for-dark" src="/assets/images/logo/logo_utm.png" style="width:150px" alt="">
             </a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"></i></div>
         </div>
         <div class="logo-icon-wrapper">
-            <a asp-area="Therapist" asp-controller="Dashboard" asp-action="Index">
+            <a asp-area="Student" asp-controller="Dashboard" asp-action="Index">
                 <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
             </a>
         </div>
@@ -23,47 +23,25 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <label class="badge badge-light-primary">2</label>
-                        <a class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-home"></use>
-                            </svg>
-                            <span class="lan-3">Dashboard</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a asp-area="Therapist" asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
-                            <li><a asp-area="Therapist" asp-controller="Dashboard" asp-action="Index">Galleries</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Student" asp-controller="SV" asp-action="SV">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Program</span>
+                            <span>Supervisor</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a asp-area="Therapist" asp-controller="Report" asp-action="UpcomingSchedules">Upcoming Schedules</a></li>
-                            <li><a asp-area="Therapist" asp-controller="Report" asp-action="PendingReports">Schedule</a></li>
-                            <li><a asp-area="Therapist" asp-controller="AssignedChild" asp-action="Index">Assigned Child</a></li>
-                          
-                        </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" asp-area="Student" asp-controller="Proposal" asp-action="Proposal">
                             <svg class="stroke-icon">
-                                <use href="/assets/svg/icon-sprite.svg#stroke-faq"></use>
+                                <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="/assets/svg/icon-sprite.svg#fill-faq"></use>
+                                <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>FAQ</span>
+                            <span>Proposal</span>
                         </a>
                     </li>
                 </ul>
