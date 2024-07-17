@@ -34,7 +34,7 @@ namespace ADStarter.DataAccess.Data
 
             modelBuilder.Entity<Proposal>()
                 .Property(p => p.st_id)
-                .HasDefaultValue("Rejected");
+                .HasDefaultValue("Pending");
 
         }
     }
