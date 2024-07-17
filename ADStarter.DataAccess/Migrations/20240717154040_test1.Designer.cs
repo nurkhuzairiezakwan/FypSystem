@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADStarter.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240713072939_addDb")]
-    partial class addDb
+    [Migration("20240717154040_test1")]
+    partial class test1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,15 +166,13 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("p_id"));
 
-                    b.Property<int>("Students_id")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsResubmission")
+                        .HasColumnType("bit");
 
                     b.Property<string>("p_evaluator1_comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_evaluator2_comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_file")
@@ -182,23 +180,23 @@ namespace ADStarter.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_sv_comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("p_title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("s_id")
+                    b.Property<int?>("s_id")
                         .HasColumnType("int");
 
                     b.Property<string>("st_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Accepted with Conditions");
 
                     b.HasKey("p_id");
 
-                    b.HasIndex("Students_id");
+                    b.HasIndex("s_id");
 
                     b.ToTable("Proposals");
                 });
@@ -211,45 +209,37 @@ namespace ADStarter.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("s_id"));
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("User")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_SV")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_SVagreement")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_academic_session")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_evaluator2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_semester")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("s_statusSV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Pending");
 
                     b.Property<string>("s_user")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("s_id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Students");
                 });
@@ -400,22 +390,9 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Student", "Student")
                         .WithMany("Proposals")
-                        .HasForeignKey("Students_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("s_id");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("ADStarter.Models.Student", b =>
-                {
-                    b.HasOne("ADStarter.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

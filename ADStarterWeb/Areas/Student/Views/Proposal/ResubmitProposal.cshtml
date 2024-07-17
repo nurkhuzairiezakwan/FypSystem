@@ -1,0 +1,58 @@
+﻿@model ADStarter.Models.Proposal
+
+@{
+    ViewData["Title"] = "Add New Supervisor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userId = ViewBag.userId;
+    var test = userId;
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Add New Supervisor</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">User Management</li>
+                        <li class="breadcrumb-item active">Resubmit </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="ResubmitProposal" method="post" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="p_title" class="form-label">Proposal Title</label>
+                            <input type="text" name="p_title" asp-for="p_title" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="p_file" class="form-label">Proposal File</label>
+                            <input type="file" name="file" asp-for="p_file" class="form-control" />
+                        </div>
+                    </div>
+                    <input type="hidden" name="p_id" value="@userId" />
+                    <input type="hidden" asp-for="IsResubmission" value="true" />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mt-3">Resubmit</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

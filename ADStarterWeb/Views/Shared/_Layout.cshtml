@@ -53,17 +53,17 @@ else
             <div class="page-body-wrapper sidebar-icon">
                 <partial name="_Header" />
                 <div class="page-body-wrapper">
-                    @if (ViewContext.RouteData.Values["area"]?.ToString() == "Parent")
+                    @if (ViewContext.RouteData.Values["area"]?.ToString() == "Comittee")
                     {
-                        @await Html.PartialAsync("_SidebarParent")
+                        @await Html.PartialAsync("_SidebarComittee")
                     }
-                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Therapist")
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Lecturer")
                     {
-                        @await Html.PartialAsync("_SidebarTherapist")
+                        @await Html.PartialAsync("_SidebarLecturer")
                     }
-                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "CustomerService")
+                    else if (ViewContext.RouteData.Values["area"]?.ToString() == "Student")
                     {
-                        @await Html.PartialAsync("_SidebarCustomerService")
+                        @await Html.PartialAsync("_SidebarStudent")
                     }
                     else if (ViewContext.RouteData.Values["area"]?.ToString() == "Admin")
                     {
