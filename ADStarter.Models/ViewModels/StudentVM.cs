@@ -24,7 +24,9 @@ namespace ADStarter.Models.ViewModels
         public string user_contact { get; set; }
         public string st_id { get; set; } 
         public Student Student { get; set; }
-        public string SupervisorName { get; set; } // Add this property
+        public string SupervisorName { get; set; }
+        public string EvaluatorName1 { get; set; }
+        public string EvaluatorName2 { get; set; }
         public ApplicationUser User {  get; set; }
         public IList<string> Roles { get; set; }
     }

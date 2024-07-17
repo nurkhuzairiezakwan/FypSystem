@@ -72,8 +72,8 @@
                                     <span>Data not found</span>
                                 }
                                 </td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator1) ? Model.Student.s_evaluator1 : "Data not found")</td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator2) ? Model.Student.s_evaluator2 : "Data not found")</td>
+                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator1) ? Model.EvaluatorName1 : "Data not found")</td>
+                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator2) ? Model.EvaluatorName2 : "Data not found")</td>
                                 
                             </tr>
                         </tbody>

@@ -38,19 +38,35 @@ namespace ADStarterWeb.Areas.Student.Controllers
 
             // Fetch the supervisor's details if the supervisor ID is not null
             string supervisorName = null;
+            string evaluatorName1 = null;
+            string evaluatorName2 = null;
             if (!string.IsNullOrEmpty(student.s_SV))
             {
                 var supervisor = _userManager.Users.FirstOrDefault(u => u.Id == student.s_SV);
+                var evaluator1 = _userManager.Users.FirstOrDefault(u => u.Id == student.s_evaluator1);
+                var evaluator2 = _userManager.Users.FirstOrDefault(u => u.Id == student.s_evaluator2);
                 if (supervisor != null)
                 {
                     supervisorName = supervisor.user_name; // Assuming the username is stored in UserName property
                 }
+                if (evaluator1 != null)
+                {
+                    evaluatorName1 = evaluator1.user_name; // Assuming the username is stored in UserName property
+                }
+                if (evaluator2 != null)
+                {
+                    evaluatorName2 = evaluator2.user_name; // Assuming the username is stored in UserName property
+                }
+
             }
 
             var viewModel = new StudentVM
             {
                 Student = student,
-                SupervisorName = supervisorName
+                SupervisorName = supervisorName,
+                EvaluatorName1 = evaluatorName1,
+                EvaluatorName2 = evaluatorName2
+
             };
 
             ViewBag.userId = userId;
@@ -91,12 +107,17 @@ namespace ADStarterWeb.Areas.Student.Controllers
                 return BadRequest("Student object cannot be null");
             }
 
-            var user = _userManager.GetUserId(User);
-            
-            
+            var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return Unauthorized();
+            }
+
+            // Retrieve the ApplicationUser using the userId
+            var applicationUser = await _userManager.FindByIdAsync(userId);
+            if (applicationUser == null)
+            {
+                return NotFound("User not found");
             }
 
             // Assign supervisor and other details to the student
@@ -104,6 +125,8 @@ namespace ADStarterWeb.Areas.Student.Controllers
             student.s_semester = semester;
             student.s_academic_session = academicSession;
             student.User = userId;
+            student.Id = userId;
+            student.s_user = applicationUser.user_name; // Assign the user_name to s_user
 
             try
             {
@@ -119,8 +142,6 @@ namespace ADStarterWeb.Areas.Student.Controllers
 
             return RedirectToAction("SV", "SV", new { area = "Student" });
         }
-
-
 
     }
 }

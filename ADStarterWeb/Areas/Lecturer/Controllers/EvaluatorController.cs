@@ -32,10 +32,10 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Contains("Student"))
                 {
-                    var student = _unitOfWork.Students.Get(s => (s.s_evaluator1 == userId || s.s_evaluator2 == userId) && s.Id == user.Id);
+                    var student = _unitOfWork.Student.Get(s => (s.s_evaluator1 == userId || s.s_evaluator2 == userId) && s.Id == user.Id);
                     if (student != null)
                     {
-                        var proposal = _unitOfWork.Proposals.Get(p => p.s_id == student.s_id);
+                        var proposal = _unitOfWork.Proposal.Get(p => p.s_id == student.s_id);
                         var thisViewModel = new ProposalVM
                         {
                             p_id = proposal.p_id,
@@ -59,7 +59,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
 
         public async Task<IActionResult> ViewDetails(int id)
         {
-            var proposal = _unitOfWork.Proposals.GetFirstOrDefault(p => p.s_id == id);
+            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.s_id == id);
             if (proposal == null)
             {
                 return NotFound();
@@ -72,7 +72,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
         public async Task<IActionResult> ViewDetails(int s_id, string st_id, string? comment)
         {
             var userId = _userManager.GetUserId(User);
-            var proposal = _unitOfWork.Proposals.GetFirstOrDefault(p => p.s_id == s_id);
+            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.s_id == s_id);
 
             if (proposal == null)
             {
@@ -81,7 +81,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
 
             proposal.st_id = st_id;
 
-            var student = _unitOfWork.Students.Get(s => s.s_id == s_id);
+            var student = _unitOfWork.Student.Get(s => s.s_id == s_id);
 
             if (student.s_evaluator1 == userId)
             {
@@ -98,7 +98,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
                 }
             }
 
-            _unitOfWork.Proposals.Update(proposal);
+            _unitOfWork.Proposal.Update(proposal);
             _unitOfWork.Save();
 
             return RedirectToAction("ProposalList");

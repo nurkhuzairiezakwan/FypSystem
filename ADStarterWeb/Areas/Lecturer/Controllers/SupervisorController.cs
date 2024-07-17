@@ -31,10 +31,10 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Contains("Student"))
                 {
-                    var student = _unitOfWork.Students.Get(s => s.s_SV == userId && s.Id == user.Id);
+                    var student = _unitOfWork.Student.Get(s => s.s_SV == userId && s.Id == user.Id);
                     if (student != null)
                     {
-                        var proposal = _unitOfWork.Proposals.Get(p => p.s_id == student.s_id);
+                        var proposal = _unitOfWork.Proposal.Get(p => p.s_id == student.s_id);
                         var thisViewModel = new StudentVM
                         {
                             s_id = student.s_id,
@@ -61,7 +61,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
 
         public async Task<IActionResult> ReviewProposal(int id)
         {
-            var proposal = _unitOfWork.Proposals.GetFirstOrDefault(p => p.s_id == id);
+            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.s_id == id);
             if (proposal == null)
             {
                 return NotFound();
@@ -75,7 +75,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
         {
             Console.WriteLine("Form submitted: ID = " + id + ", Comment = " + comment);
 
-            var proposal = _unitOfWork.Proposals.GetFirstOrDefault(p => p.p_id == id);
+            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.p_id == id);
             if (proposal == null)
             {
                 Console.WriteLine("Proposal not found");
@@ -85,7 +85,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
             if (comment != null)
             {
                 proposal.p_sv_comment = comment;
-                _unitOfWork.Proposals.Update(proposal);
+                _unitOfWork.Proposal.Update(proposal);
                 _unitOfWork.Save();
             }
 
@@ -94,7 +94,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
 
         public async Task<IActionResult> EvaluationDetails(int id)
         {
-            var proposal = _unitOfWork.Proposals.GetFirstOrDefault(p => p.s_id == id);
+            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.s_id == id);
             if (proposal == null)
             {
                 return NotFound();
