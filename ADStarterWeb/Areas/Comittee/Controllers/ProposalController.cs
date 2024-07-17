@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using ADStarter.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ADStarterWeb.Areas.Comittee.Controllers
 {
@@ -65,17 +66,33 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
 
         // Action to show assign evaluators page
         [HttpGet]
-        public IActionResult AssignEvaluators(int proposalId)
+        public async Task<IActionResult> AssignEvaluators(int proposalId)
         {
-            var proposal = _context.Proposals
+            var proposal = await _context.Proposals
                 .Include(p => p.Student)
                 .ThenInclude(s => s.User)
-                .FirstOrDefault(p => p.p_id == proposalId);
+                .FirstOrDefaultAsync(p => p.p_id == proposalId);
 
             if (proposal == null)
             {
                 return NotFound();
             }
+
+            // Retrieve the supervisor ID
+            var supervisorId = proposal.Student.s_SV;
+
+            // Get the list of all evaluators who are lecturers
+            var evaluators = await _userManager.GetUsersInRoleAsync("Lecturer");
+
+            // Filter out the supervisor from the list of evaluators
+            var availableEvaluators = evaluators
+                .Where(e => e.Id != supervisorId)
+                .Select(e => new SelectListItem
+                {
+                    Value = e.Id,
+                    Text = e.user_name
+                })
+                .ToList();
 
             var viewModel = new ProposalAssignmentViewModel
             {
@@ -88,11 +105,13 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
                 s_SV = proposal.Student.s_SV,
                 s_evaluator1 = proposal.Student.s_evaluator1,
                 s_evaluator2 = proposal.Student.s_evaluator2,
-                pt_ID = proposal.Student.User.pt_ID
+                pt_ID = proposal.Student.User.pt_ID,
+                AvailableEvaluators = availableEvaluators
             };
 
             return View(viewModel);
         }
+
 
         // Action to handle assign evaluators
         [HttpPost]

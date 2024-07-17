@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,6 @@ namespace ADStarter.Models.ViewModels
         public string s_evaluator1 { get; set; }
         public string s_evaluator2 { get; set; }
         public string pt_ID { get; set; } // Project Type from ApplicationUser
+        public List<SelectListItem> AvailableEvaluators { get; set; } // New property
     }
 }
