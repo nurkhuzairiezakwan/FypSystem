@@ -71,7 +71,7 @@ else
                     }
                     else
                     {
-                        <partial name="_SidePenal" />
+                        @await Html.PartialAsync("_SidebarAdmin")
                     }
                     @RenderBody()
                     <partial name="_Footer" />

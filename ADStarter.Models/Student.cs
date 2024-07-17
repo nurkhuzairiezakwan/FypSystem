@@ -19,10 +19,11 @@ namespace ADStarter.Models
         public string? s_evaluator2 { get; set; }
         public string? s_SV { get; set; }
         public string? s_statusSV { get; set; } // Nullable
-        public string s_academic_session { get; set; }
-        public string s_semester { get; set; }
-        public string? s_SVagreement { get; set; }
         public string UserId { get; set; }
+        public string? s_academic_session { get; set; }
+        public string? s_semester { get; set; }
+        public string? s_SVagreement { get; set; }
+>
         public ApplicationUser User { get; set; }
 
         // Navigation properties

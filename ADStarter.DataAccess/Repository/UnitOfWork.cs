@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ADStarter.Models;
 
 namespace ADStarter.DataAccess.Repository
 {
@@ -17,11 +18,13 @@ namespace ADStarter.DataAccess.Repository
         private ApplicationDBContext _db;
         public ICourseRepository Course { get; private set; }
         public IProposalRepository Proposal { get; private set; }
+        public IStudentRepository Student { get; private set; }
 
         public UnitOfWork(ApplicationDBContext db)
         {
             _db = db;
             Course = new CourseRepository(_db);
+            Student = new StudentRepository(_db);
 
         }
 

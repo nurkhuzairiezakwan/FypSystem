@@ -21,12 +21,13 @@ namespace   ADStarter.Models
         public string user_matric { get; set; }
         [DisplayName("Full Name")]
         public string user_name { get; set; }
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Phone Number.")]
         [DisplayName("Contact")]
         public string user_contact { get; set; }
         [DisplayName("Address")]
         public string user_address { get; set; }
-        public string pt_ID { get; set; }
-        public int? course_ID { get; set; }
+        public string? pt_ID { get; set; }
+        public int course_ID { get; set; }
 
         [ForeignKey("course_ID")]
         public virtual Course course { get; set; }

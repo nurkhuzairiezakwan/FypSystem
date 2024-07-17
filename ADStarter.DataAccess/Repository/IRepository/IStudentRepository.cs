@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ADStarter.DataAccess.Repository.IRepository
 {
-    public interface ICourseRepository : IRepository<Course>
+    public interface IStudentRepository : IRepository<Student>
     {
-        Task<Course> GetByIdAsync(int id);
-        void Update(Course obj);
+        Task<Student> GetByIdAsync(int id);
+        void Update(Student obj);
     }
 }

@@ -1,0 +1,166 @@
+﻿@page
+@using ADStarterWeb.Areas.Identity.Pages.Account
+@model RegisterUserModel
+@{
+    ViewData["Title"] = "Register Simple";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Register</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Account</li>
+                        <li class="breadcrumb-item active">Register</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Create your account</h5>
+                        <p>Enter your personal details to create an account</p>
+                    </div>
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="theme-form">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Name</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Input.user_name" class="form-control" autocomplete="username" aria-required="true" placeholder="Full Name" />
+                                            <span asp-validation-for="Input.user_name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">IC</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Input.user_IC" class="form-control" autocomplete="username" aria-required="true" placeholder="e.g 123456789012" />
+                                            <span asp-validation-for="Input.user_IC" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Matric No.</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Input.user_matric" class="form-control" autocomplete="username" aria-required="true" placeholder="A21EC1234" />
+                                            <span asp-validation-for="Input.user_matric" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Address</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Input.user_address" class="form-control" autocomplete="username" aria-required="true" placeholder="Address" />
+                                            <span asp-validation-for="Input.user_address" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Contact</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Input.user_contact" class="form-control" autocomplete="username" aria-required="true" placeholder="Contact Number" />
+                                            <span asp-validation-for="Input.user_contact" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Course</label>
+                                        <div class="col-sm-9">
+                                            <select asp-for="Input.course_ID" asp-items="Model.Input.CourseList" class="form-select">
+                                                <option disabled selected value="">-Select Course-</option>
+                                            </select>
+                                            <span asp-validation-for="Input.course_ID" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @* <div class="mb-3 row">
+                                        <label asp-for="Input.pt_ID" class="col-sm-3 col-form-label">Project Type</label>
+                                        <div class="col-sm-9">
+                                            <select asp-for="Input.pt_ID" class="form-select">
+                                                <option disabled selected>Select Domain</option>
+                                                <option value="Development">Development</option>
+                                                <option value="Research">Research</option>
+                                            </select>
+                                            <span asp-validation-for="Input.pt_ID" class="text-danger"></span>
+                                        </div>
+                                    </div> *@
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label mb-3">Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-input position-relative">
+                                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
+                                                <div class="show-hide"><span class="show"></span></div>
+                                            </div>
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label mb-3">Confirm Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-input position-relative">
+                                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
+                                                <div class="show-hide"><span class="show"></span></div>
+                                            </div>
+                                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Role</label>
+                                        <div class="col-sm-9">
+                                            <select asp-for="Input.Role" asp-items="Model.Input.RoleList" class="form-select">
+                                                <option disabled selected>-Select Role-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button id="registerSubmit" type="submit" class="btn btn-primary">Create Account</button>
+                                <input class="btn btn-light" type="reset" value="Reset">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <!-- Theme js-->
+    <script src="~/assets/js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.show-hide').on('click', function () {
+                var passwordField = $(this).siblings('input');
+                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+                passwordField.attr('type', type);
+                $(this).toggleClass('show');
+            });
+        });
+    </script>
+}

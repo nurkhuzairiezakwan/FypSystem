@@ -10,7 +10,7 @@ namespace ADStarter.Utility
     {
         public const string Role_Admin = "Admin";
         public const string Role_Lecturer = "Lecturer";
-        public const string Role_Comittee = "Comittee";
+        public const string Role_Committee = "Committee";
         public const string Role_Student = "Student";
     }
 }

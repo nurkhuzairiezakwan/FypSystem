@@ -28,24 +28,24 @@ using Microsoft.Extensions.Logging;
 
 namespace ADStarterWeb.Areas.Identity.Pages.Account
 {
-    public class RegisterLectModel : PageModel
+    public class RegisterUserModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
-        private readonly ILogger<RegisterLectModel> _logger;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly IUserEmailStore<ApplicationUser> _emailStore;
+        private readonly ILogger<RegisterUserModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationDBContext _context;
 
-        public RegisterLectModel(
-            UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
+        public RegisterUserModel(
+            UserManager<ApplicationUser> userManager,
+            IUserStore<ApplicationUser> userStore,
             RoleManager<IdentityRole> roleManager,
-            SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterLectModel> logger,
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<RegisterUserModel> logger,
             IEmailSender emailSender,
             IHttpContextAccessor httpContextAccessor,
             ApplicationDBContext context)
@@ -98,7 +98,6 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             public string user_name { get; set; }
             public string user_contact { get; set; }
             public string user_address { get; set; }
-            public string pt_ID { get; set; }
 
             public int course_ID { get; set; }
             [ValidateNever]
@@ -111,7 +110,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Lecturer)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Comittee)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Committee)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Student)).GetAwaiter().GetResult();
             }
 
@@ -130,6 +129,41 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                var existingUserByIC = _context.Users.FirstOrDefault(u => u.user_IC == Input.user_IC);
+                if (existingUserByIC != null)
+                {
+                    ModelState.AddModelError("Input.user_IC", "IC number is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                var existingUserByMatric = _context.Users.FirstOrDefault(u => u.user_matric == Input.user_matric);
+                if (existingUserByMatric != null)
+                {
+                    ModelState.AddModelError("Input.user_matric", "Matric number is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                var existingUserByEmail = await _userManager.FindByEmailAsync(Input.Email);
+                if (existingUserByEmail != null)
+                {
+                    ModelState.AddModelError("Input.Email", "Email is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
+
+                var existingUserByPhone = _context.Users.FirstOrDefault(u => u.user_contact == Input.user_contact);
+                if (existingUserByPhone != null)
+                {
+                    ModelState.AddModelError("Input.user_contact", "Phone number is already in use.");
+                    PopulateRoles();
+                    PopulateCourses();
+                    return Page();
+                }
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -139,7 +173,6 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                 user.user_name = Input.user_name;
                 user.user_contact = Input.user_contact;
                 user.user_address = Input.user_address;
-                user.pt_ID = Input.pt_ID;
                 user.course_ID = Input.course_ID;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -173,11 +206,11 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     }
                     else if (userRoles.Contains("Lecturer"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                        return RedirectToAction("LecturerList", "Lecturer", new { area = "Admin" });
                     }
                     else if (userRoles.Contains("Comittee"))
                     {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                        return RedirectToAction("LecturerList", "Lecturer", new { area = "Admin" });
                     }
                     else if (userRoles.Contains("Student"))
                     {
@@ -206,19 +239,19 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<ApplicationUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<ApplicationUser>)_userStore;
         }
 
         private void PopulateRoles()

@@ -1,0 +1,94 @@
+﻿@model LecturerVM
+@{
+    ViewData["Title"] = "Lecturer Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h3>Lecturer Details</h3>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Name:</strong></div>
+                            <div class="col-sm-8">@Model.user_name</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Matric No.:</strong></div>
+                            <div class="col-sm-8">@Model.user_matric</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>NRIC:</strong></div>
+                            <div class="col-sm-8">@Model.user_IC</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Email:</strong></div>
+                            <div class="col-sm-8">@Model.Email</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Contact:</strong></div>
+                            <div class="col-sm-8">@Model.user_contact</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Address:</strong></div>
+                            <div class="col-sm-8">@Model.user_address</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Project Type:</strong></div>
+                            <div class="col-sm-8">
+                                @if (Model.pt_ID == "Development")
+                                {
+                                    <span class="badge rounded-pill badge-light-primary">Development</span>
+                                }
+                                else if (Model.pt_ID == "Research")
+                                {
+                                    <span class="badge rounded-pill badge-light-info">Research</span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill badge-light-dark">None</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Course:</strong></div>
+                            <div class="col-sm-8">
+                                @if (Model.course_name == "Data Engineering")
+                                {
+                                    <span class="badge rounded-pill badge-light-warning">Data Engineering</span>
+                                }
+                                else if (Model.course_name == "Software Engineering")
+                                {
+                                    <span class="badge rounded-pill badge-light-danger">Software Engineering</span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill badge-light-dark">None</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Roles:</strong></div>
+                            <div class="col-sm-8">
+                                @foreach (var role in Model.Roles)
+                                {
+                                    <span>@role</span>
+                                    <br />
+                                }
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <a href="@Url.Action("LecturerList", "Lecturer")" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

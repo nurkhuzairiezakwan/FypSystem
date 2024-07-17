@@ -11,6 +11,7 @@ namespace ADStarter.DataAccess.Repository.IRepository
     {
         ICourseRepository Course { get; }
         IProposalRepository Proposal { get; }
+        IStudentRepository Student { get; }
 
         void Save();
         IDbContextTransaction BeginTransaction();
