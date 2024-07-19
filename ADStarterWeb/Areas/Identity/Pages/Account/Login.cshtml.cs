@@ -132,7 +132,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Student" });
                     }
-                    else if (roles.Contains("Comittee"))
+                    else if (roles.Contains("Committee"))
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Comittee"});
                     }
