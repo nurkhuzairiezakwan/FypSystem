@@ -17,6 +17,7 @@ namespace ADStarter.DataAccess.Repository
     {
         private ApplicationDBContext _db;
         public ICourseRepository Course { get; private set; }
+        public IProposalRepository Proposal { get; private set; }
         public IStudentRepository Student { get; private set; }
 
         public UnitOfWork(ApplicationDBContext db)
