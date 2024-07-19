@@ -1,0 +1,84 @@
+@using ADStarter.Models.ViewModels
+@model List<ProposalVM>
+
+@{
+    ViewData["Title"] = "Proposal List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Proposal List</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Evaluator</li>
+                        <li class="breadcrumb-item active">Proposal List</li>
+                    </ol>
+                </div>
+                <div class="card-header pb-0 card-no-border">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <p class="text-muted">e.g. search by title / title / status</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="display" id="basic-6">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Student Name</th>
+                                    <th>Proposal Type</th>
+                                    <th>Proposal Title</th>
+                                    <th>Evaluator 1</th>
+                                    <th>Evaluator 2</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var proposal in Model)
+                                {
+                                    <tr>
+                                        <td>@proposal.p_id</td>
+                                        <td>@proposal.s_user</td>
+                                        <td>@proposal.pt_ID</td>
+                                        <td>@proposal.p_title</td>
+                                        <td>@proposal.s_evaluator1</td>
+                                        <td>@proposal.s_evaluator2</td>
+                                        <td>@proposal.st_id</td>
+                                        <td>
+                                            @if (proposal.st_id == "Pending")
+                                            {
+                                                <a href="@Url.Action("ViewDetails", new { id = proposal?.s_id })" class="btn btn-primary">View Details</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("ViewDetails", new { id = proposal?.s_id })" class="btn btn-primary">Reevaluate</a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+}

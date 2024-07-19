@@ -8,7 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ADStarter.DataAccess.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240717154913_addDB.cs
     public partial class addDB : Migration
+========
+    public partial class test1 : Migration
+>>>>>>>> maincopy:ADStarter.DataAccess/Migrations/20240717182430_test1.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -196,18 +200,27 @@ namespace ADStarter.DataAccess.Migrations
                     s_evaluator1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     s_evaluator2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     s_SV = table.Column<string>(type: "nvarchar(max)", nullable: true),
+<<<<<<<< HEAD:ADStarter.DataAccess/Migrations/20240717154913_addDB.cs
                     s_statusSV = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     s_academic_session = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     s_semester = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     s_SVagreement = table.Column<string>(type: "nvarchar(max)", nullable: true)
+========
+                    s_statusSV = table.Column<string>(type: "nvarchar(max)", nullable: true, defaultValue: "Pending"),
+                    s_academic_session = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    s_semester = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    s_SVagreement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    User = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
+>>>>>>>> maincopy:ADStarter.DataAccess/Migrations/20240717182430_test1.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.s_id);
                     table.ForeignKey(
-                        name: "FK_Students_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Students_AspNetUsers_Id",
+                        column: x => x.Id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -219,24 +232,23 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     p_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    s_id = table.Column<int>(type: "int", nullable: false),
+                    s_id = table.Column<int>(type: "int", nullable: true),
                     p_title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     p_file = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    st_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    p_sv_comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    p_evaluator1_comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    p_evaluator2_comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Students_id = table.Column<int>(type: "int", nullable: false)
+                    st_id = table.Column<string>(type: "nvarchar(max)", nullable: true, defaultValue: "Pending"),
+                    p_sv_comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    p_evaluator1_comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    p_evaluator2_comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsResubmission = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Proposals", x => x.p_id);
                     table.ForeignKey(
-                        name: "FK_Proposals_Students_Students_id",
-                        column: x => x.Students_id,
+                        name: "FK_Proposals_Students_s_id",
+                        column: x => x.s_id,
                         principalTable: "Students",
-                        principalColumn: "s_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "s_id");
                 });
 
             migrationBuilder.InsertData(
@@ -293,14 +305,14 @@ namespace ADStarter.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Proposals_Students_id",
+                name: "IX_Proposals_s_id",
                 table: "Proposals",
-                column: "Students_id");
+                column: "s_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_UserId",
+                name: "IX_Students_Id",
                 table: "Students",
-                column: "UserId");
+                column: "Id");
         }
 
         /// <inheritdoc />

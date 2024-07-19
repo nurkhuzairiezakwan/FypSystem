@@ -1,0 +1,172 @@
+﻿@model ADStarter.Models.Proposal
+@{
+    var userId = ViewBag.userId;
+    var svId=ViewBag.svId ;
+    var svStatus=ViewBag.svStatus;
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Proposal</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">User Management</li>
+                        <li class="breadcrumb-item active">Proposal</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                @if (Model.s_id == null && svStatus != "Pending")
+                {
+                    <div class="text-center">
+                        <p>No Record Found</p>
+                        <a href="@Url.Action("AddProposal", "Proposal", new { area = "Student", id = userId })" class="btn btn-primary">Add New Proposal</a>
+                    </div>
+                }
+                else if (svStatus == "Pending")
+                {
+                    <div class="text-center">
+                    <a id="resubmitButton" href="@Url.Action("AddProposal", "Proposal", new { area = "Student", id = userId })" class="btn btn-warning">Pending Supervisor Approval</a>
+                    </div>
+
+                }
+                else
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Proposal Title</th>
+                                <th>Proposal File</th>
+                                <th>Proposal Status</th>
+                                <th>Supervisor Comment</th>
+                                <th>Evaluator 1 Comments</th>
+                                <th>Evaluator 2 Comments</th>
+                                <th>Resubmit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">@(!string.IsNullOrEmpty(Model.p_title) ? Model.p_title : "Data not found")</td>
+                                <td class="text-center">
+                                    @if (!string.IsNullOrEmpty(Model.p_file))
+                                    {
+                                        <a href="@Model.p_file" target="_blank">View File</a>
+                                    }
+                                    else
+                                    {
+                                        <span>Data not found</span>
+                                    }
+                                </td>
+                                <td class="text-center" style="color: @(Model.st_id == "Accepted" ? "green" : Model.st_id == "Accepted with Conditions" ? "orange" : Model.st_id == "Rejected" ? "red" : Model.st_id == "Pending" ? "yellow" : "black");">
+                                    @(!string.IsNullOrEmpty(Model.st_id) ? Model.st_id : "Data not found")
+                                </td>
+                                <td class="text-center">
+                                    @if (!string.IsNullOrEmpty(Model.p_sv_comment))
+                                    {
+                                        <span class="short-text">@Model.p_sv_comment.Substring(0, 20)...</span>
+                                        <span class="full-text d-none">@Model.p_sv_comment</span>
+                                        <button class="btn btn-link read-more-less">Read More</button>
+                                    }
+                                    else
+                                    {
+                                        <span>No Comment Yet</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @if (!string.IsNullOrEmpty(Model.p_evaluator1_comment))
+                                    {
+                                        <span class="short-text">@Model.p_evaluator1_comment.Substring(0, 20)...</span>
+                                        <span class="full-text d-none">@Model.p_evaluator1_comment</span>
+                                        <button class="btn btn-link read-more-less">Read More</button>
+                                    }
+                                    else
+                                    {
+                                        <span>No Comment Yet</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @if (!string.IsNullOrEmpty(Model.p_evaluator2_comment))
+                                    {
+                                        <span class="short-text">@Model.p_evaluator2_comment.Substring(0, 20)...</span>
+                                        <span class="full-text d-none">@Model.p_evaluator2_comment</span>
+                                        <button class="btn btn-link read-more-less">Read More</button>
+                                    }
+                                    else
+                                    {
+                                        <span>No Comment Yet</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @if (Model.st_id == "Accepted with Conditions" || Model.st_id == "Rejected")
+                                    {
+                                        <a href="@Url.Action("ResubmitProposal", "Proposal", new { id = Model.p_id })" class="btn btn-warning">Resubmit Proposal</a>
+                                    }
+
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.read-more-less').forEach(button => {
+            button.addEventListener('click', function () {
+                const shortText = this.previousElementSibling.previousElementSibling;
+                const fullText = this.previousElementSibling;
+
+                if (fullText.classList.contains('d-none')) {
+                    shortText.classList.add('d-none');
+                    fullText.classList.remove('d-none');
+                    this.textContent = 'Read Less';
+                } else {
+                    shortText.classList.remove('d-none');
+                    fullText.classList.add('d-none');
+                    this.textContent = 'Read More';
+                }
+            });
+        });
+    </script>
+    <script>
+        // Disable the link
+        document.getElementById('resubmitButton').addEventListener('click', function (event) {
+            event.preventDefault();  // Prevent the default action
+            return false;  // For older browsers
+        });
+    </script>
+    <style>
+        .short-text {
+            display: inline;
+        }
+
+        .full-text {
+            display: none;
+        }
+
+        .d-none {
+            display: none;
+        }
+    </style>
+}

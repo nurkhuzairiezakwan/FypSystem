@@ -13,8 +13,8 @@ namespace ADStarter.DataAccess.Repository
     public class ProposalRepository : Repository<Proposal>, IProposalRepository
     {
         private ApplicationDBContext _db;
-        public ProposalRepository(ApplicationDBContext db) : base(db) 
-        { 
+        public ProposalRepository(ApplicationDBContext db) : base(db)
+        {
             _db = db;
         }
         public void Update(Proposal obj)

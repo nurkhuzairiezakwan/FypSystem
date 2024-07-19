@@ -14,8 +14,8 @@ namespace ADStarter.DataAccess.Repository
     public class StudentRepository : Repository<Student>, IStudentRepository
     {
         private ApplicationDBContext _db;
-        public StudentRepository(ApplicationDBContext db) : base(db) 
-        { 
+        public StudentRepository(ApplicationDBContext db) : base(db)
+        {
             _db = db;
         }
         public void Update(Student obj)
