@@ -34,7 +34,7 @@ namespace ADStarterWeb.Areas.Student.Controllers
         public IActionResult AddProposal(Proposal proposal, IFormFile? file)
         {
             var userId = _userManager.GetUserId(User);
-            var student = _unitOfWork.Student.GetFirstOrDefault(s => s.User == userId);
+            var student = _unitOfWork.Student.GetFirstOrDefault(s => s.User.Id == userId);
             if (student == null)
             {
                 return NotFound("Student not found");
@@ -52,7 +52,7 @@ namespace ADStarterWeb.Areas.Student.Controllers
         public IActionResult Proposal()
         {
             var userId = _userManager.GetUserId(User);
-            var student = _unitOfWork.Student.GetFirstOrDefault(s => s.User == userId);
+            var student = _unitOfWork.Student.GetFirstOrDefault(s => s.User.Id == userId);
 
             if (student == null)
             {
@@ -64,7 +64,7 @@ namespace ADStarterWeb.Areas.Student.Controllers
             ViewBag.svStatus = student.s_statusSV;
             ViewBag.userId = userId;
 
-            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.Student.User == userId);
+            var proposal = _unitOfWork.Proposal.GetFirstOrDefault(p => p.Student.User.Id == userId);
 
             if (proposal == null)
             {

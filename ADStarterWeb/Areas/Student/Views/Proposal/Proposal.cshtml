@@ -1,8 +1,8 @@
 ﻿@model ADStarter.Models.Proposal
 @{
     var userId = ViewBag.userId;
-    var svId=ViewBag.svId ;
-    var svStatus=ViewBag.svStatus;
+    var svId = ViewBag.svId;
+    var svStatus = ViewBag.svStatus;
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -33,7 +33,7 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
-                @if (Model.s_id == null && svStatus != "Pending")
+                @if (Model.p_id == null && svStatus != "Pending")
                 {
                     <div class="text-center">
                         <p>No Record Found</p>
@@ -43,9 +43,8 @@
                 else if (svStatus == "Pending")
                 {
                     <div class="text-center">
-                    <a id="resubmitButton" href="@Url.Action("AddProposal", "Proposal", new { area = "Student", id = userId })" class="btn btn-warning">Pending Supervisor Approval</a>
+                        <a id="resubmitButton" href="@Url.Action("AddProposal", "Proposal", new { area = "Student", id = userId })" class="btn btn-warning">Pending Supervisor Approval</a>
                     </div>
-
                 }
                 else
                 {
@@ -80,9 +79,7 @@
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(Model.p_sv_comment))
                                     {
-                                        <span class="short-text">@Model.p_sv_comment.Substring(0, 20)...</span>
-                                        <span class="full-text d-none">@Model.p_sv_comment</span>
-                                        <button class="btn btn-link read-more-less">Read More</button>
+                                        <span>@Model.p_sv_comment</span>
                                     }
                                     else
                                     {
@@ -92,9 +89,7 @@
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(Model.p_evaluator1_comment))
                                     {
-                                        <span class="short-text">@Model.p_evaluator1_comment.Substring(0, 20)...</span>
-                                        <span class="full-text d-none">@Model.p_evaluator1_comment</span>
-                                        <button class="btn btn-link read-more-less">Read More</button>
+                                        <span>@Model.p_evaluator1_comment</span>
                                     }
                                     else
                                     {
@@ -104,9 +99,7 @@
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(Model.p_evaluator2_comment))
                                     {
-                                        <span class="short-text">@Model.p_evaluator2_comment.Substring(0, 20)...</span>
-                                        <span class="full-text d-none">@Model.p_evaluator2_comment</span>
-                                        <button class="btn btn-link read-more-less">Read More</button>
+                                        <span>@Model.p_evaluator2_comment</span>
                                     }
                                     else
                                     {
@@ -118,8 +111,6 @@
                                     {
                                         <a href="@Url.Action("ResubmitProposal", "Proposal", new { id = Model.p_id })" class="btn btn-warning">Resubmit Proposal</a>
                                     }
-
-                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -131,42 +122,5 @@
 </div>
 
 @section Scripts {
-    <script>
-        document.querySelectorAll('.read-more-less').forEach(button => {
-            button.addEventListener('click', function () {
-                const shortText = this.previousElementSibling.previousElementSibling;
-                const fullText = this.previousElementSibling;
-
-                if (fullText.classList.contains('d-none')) {
-                    shortText.classList.add('d-none');
-                    fullText.classList.remove('d-none');
-                    this.textContent = 'Read Less';
-                } else {
-                    shortText.classList.remove('d-none');
-                    fullText.classList.add('d-none');
-                    this.textContent = 'Read More';
-                }
-            });
-        });
-    </script>
-    <script>
-        // Disable the link
-        document.getElementById('resubmitButton').addEventListener('click', function (event) {
-            event.preventDefault();  // Prevent the default action
-            return false;  // For older browsers
-        });
-    </script>
-    <style>
-        .short-text {
-            display: inline;
-        }
-
-        .full-text {
-            display: none;
-        }
-
-        .d-none {
-            display: none;
-        }
-    </style>
+    <!-- Remove or comment out any script related to Read More/Read Less functionality -->
 }

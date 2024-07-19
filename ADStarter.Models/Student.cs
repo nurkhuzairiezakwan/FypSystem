@@ -26,9 +26,9 @@ namespace ADStarter.Models
         public string? s_semester { get; set; }
         public string? s_SVagreement { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
 
-        public string User { get; set; }
+        //public string User { get; set; }
         public string Id { get; set; }
 
         // Navigation properties

@@ -208,7 +208,7 @@ namespace ADStarterWeb.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("LecturerList", "Lecturer", new { area = "Admin" });
                     }
-                    else if (userRoles.Contains("Comittee"))
+                    else if (userRoles.Contains("Committee"))
                     {
                         return RedirectToAction("LecturerList", "Lecturer", new { area = "Admin" });
                     }

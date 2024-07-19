@@ -20,36 +20,43 @@
                         <h4>Create your account</h4>
                         <p>Enter your personal details to create an account</p>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
                         <div class="form-group">
-                            <label class="col-form-label pt-0">Name </label>
+                            <label class="col-form-label pt-0">Name</label>
                             <input asp-for="Input.user_name" class="form-control" autocomplete="username" aria-required="true" placeholder="Ali Bin Abu" />
                             <span asp-validation-for="Input.user_name" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">IC</label>
-                            <input asp-for="Input.user_IC" class="form-control" autocomplete="username" aria-required="true" placeholder="123456789012" />
+                            <input asp-for="Input.user_IC" class="form-control" aria-required="true" placeholder="123456789012" />
                             <span asp-validation-for="Input.user_IC" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Matric No.</label>
-                            <input asp-for="Input.user_matric" class="form-control" autocomplete="username" aria-required="true" placeholder="A21EC1234" />
+                            <input asp-for="Input.user_matric" class="form-control" aria-required="true" placeholder="A21EC1234" />
                             <span asp-validation-for="Input.user_matric" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Address</label>
-                            <input asp-for="Input.user_address" class="form-control" autocomplete="username" aria-required="true" placeholder="Address" />
+                            <input asp-for="Input.user_address" class="form-control" type="address" aria-required="true" placeholder="Address" />
                             <span asp-validation-for="Input.user_address" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Email</label>
-                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <input asp-for="Input.Email" class="form-control" type="email" aria-required="true" placeholder="name@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Contact</label>
-                            <input asp-for="Input.user_contact" class="form-control" autocomplete="username" aria-required="true" placeholder="Contact Number" />
+                            <input asp-for="Input.user_contact" class="form-control" type="ph" aria-required="true" placeholder="Contact Number" />
                             <span asp-validation-for="Input.user_contact" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Course</label>
                             <select asp-for="Input.course_ID" asp-items="Model.Input.CourseList" class="form-select">
@@ -57,6 +64,7 @@
                             </select>
                             <span asp-validation-for="Input.course_ID" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label asp-for="Input.pt_ID" class="col-form-label pt-0">Project Type</label>
                             <select asp-for="Input.pt_ID" class="form-select">
@@ -66,35 +74,29 @@
                             </select>
                             <span asp-validation-for="Input.pt_ID" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Password</label>
                             <div class="form-input position-relative">
-                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
+                                <input asp-for="Input.Password" class="form-control" type="password" autocomplete="new-password" aria-required="true" placeholder="*********" />
                                 <div class="show-hide"><span class="show"></span></div>
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
-                            
                         </div>
+
                         <div class="form-group">
                             <label class="col-form-label pt-0">Confirm Password</label>
                             <div class="form-input position-relative">
-                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="*********" />
+                                <input asp-for="Input.ConfirmPassword" class="form-control" type="password" autocomplete="new-password" aria-required="true" placeholder="*********" />
                                 <div class="show-hide"><span class="show"></span></div>
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-                        @* @if (User.IsInRole(SD.Role_Admin))
-                        { *@
-                            <div class="form-group">
-                            <label class="col-form-label pt-0">Select Role</label>
-                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                                    <option disabled selected>-Select Role-</option>
-                                </select>
-                            </div>
-                        @* } *@
+
                         <div class="form-group mb-0">
                             <button id="registerSubmit" type="submit" class="btn btn-primary btn-block w-100">Create Account</button>
                         </div>
+
                         <h6 class="text-muted mt-4 or">Or sign up with</h6>
                         <p class="mt-4 mb-0">
                             Already have an account?
@@ -106,7 +108,7 @@
         </div>
     </div>
 </div>
-s
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/assets/js/login.js"></script>

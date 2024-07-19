@@ -10,7 +10,7 @@ namespace ADStarter.Models
         [Key]
         public int p_id { get; set; }
 
-        public int? s_id { get; set; }
+        public int s_id { get; set; }
 
         [DisplayName("Title")]
         public string p_title { get; set; }

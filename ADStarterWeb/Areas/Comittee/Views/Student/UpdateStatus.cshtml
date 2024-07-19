@@ -5,45 +5,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml"; // Adjust path to your layout
 }
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
             <h3>Update Status for @Model.UserName (@Model.UserMatric)</h3>
         </div>
-        <div class="card-body">
-            <form asp-action="UpdateStatus" asp-controller="Student" asp-area="Comittee" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="s_id" value="@Model.s_id" />
+    </div>
 
-                <div class="form-group">
-                    <label>Supervisor</label>
-                    <input type="text" class="form-control" value="@Model.s_SV" disabled />
-                </div>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="UpdateStatus" asp-controller="Student" asp-area="Committee" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="s_id" value="@Model.s_id" />
 
-                <div class="form-group">
-                    <label>Status</label>
-                    <input type="text" class="form-control" value="@Model.s_statusSV" disabled />
-                </div>
+                    <div class="form-group">
+                        <label>Supervisor</label>
+                        <input type="text" class="form-control" value="@Model.s_SV" disabled />
+                    </div>
 
-                <div class="form-group">
-                    <label>Academic Session</label>
-                    <input type="text" class="form-control" value="@Model.s_academic_session" disabled />
-                </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <input type="text" class="form-control" value="@Model.s_statusSV" disabled />
+                    </div>
 
-                <div class="form-group">
-                    <label>Semester</label>
-                    <input type="text" class="form-control" value="@Model.s_semester" disabled />
-                </div>
+                    <div class="form-group">
+                        <label>Academic Session</label>
+                        <input type="text" class="form-control" value="@Model.s_academic_session" disabled />
+                    </div>
 
-                <div class="form-group">
-                    <label>Upload Agreement</label>
-                    <input type="file" name="file" class="form-control" />
-                </div>
+                    <div class="form-group">
+                        <label>Semester</label>
+                        <input type="text" class="form-control" value="@Model.s_semester" disabled />
+                    </div>
 
-                <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-success">Approve & Upload</button>
-                    <a href="@Url.Action("ListStudents", "Student", new { area = "Comittee" })" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <label>Upload Agreement</label>
+                        <input type="file" name="file" class="form-control" />
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-success">Approve & Upload</button>
+                        <a href="@Url.Action("ListStudents", "Student", new { area = "Committee" })" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

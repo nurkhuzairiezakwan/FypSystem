@@ -74,11 +74,10 @@ namespace ADStarter.DataAccess.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int?>("course_ID")
+                    b.Property<int>("course_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("pt_ID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("user_IC")
@@ -183,7 +182,7 @@ namespace ADStarter.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("s_id")
+                    b.Property<int>("s_id")
                         .HasColumnType("int");
 
                     b.Property<string>("st_id")
@@ -208,11 +207,11 @@ namespace ADStarter.DataAccess.Migrations
 
                     b.Property<string>("Id")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("User")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("s_SV")
                         .HasColumnType("nvarchar(max)");
@@ -242,7 +241,7 @@ namespace ADStarter.DataAccess.Migrations
 
                     b.HasKey("s_id");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Students");
                 });
@@ -384,7 +383,9 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Course", "course")
                         .WithMany()
-                        .HasForeignKey("course_ID");
+                        .HasForeignKey("course_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("course");
                 });
@@ -393,20 +394,22 @@ namespace ADStarter.DataAccess.Migrations
                 {
                     b.HasOne("ADStarter.Models.Student", "Student")
                         .WithMany("Proposals")
-                        .HasForeignKey("s_id");
+                        .HasForeignKey("s_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
                 });
 
             modelBuilder.Entity("ADStarter.Models.Student", b =>
                 {
-                    b.HasOne("ADStarter.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("ADStarter.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

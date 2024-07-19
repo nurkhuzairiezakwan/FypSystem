@@ -26,9 +26,8 @@ namespace ADStarterWeb.Areas.Student.Controllers
         public IActionResult SV()
         {
             var userId = _userManager.GetUserId(User);
-
             // Fetch the student data for the current user
-            var student = _unitOfWork.Student.GetFirstOrDefault(s => s.User == userId);
+            var student = _unitOfWork.Student.GetFirstOrDefault(s => s.User.Id == userId);
 
             // If no student is found, initialize a new student object
             if (student == null)
@@ -115,6 +114,7 @@ namespace ADStarterWeb.Areas.Student.Controllers
 
             // Retrieve the ApplicationUser using the userId
             var applicationUser = await _userManager.FindByIdAsync(userId);
+            var test = applicationUser.Id;
             if (applicationUser == null)
             {
                 return NotFound("User not found");
@@ -124,7 +124,8 @@ namespace ADStarterWeb.Areas.Student.Controllers
             student.s_SV = id;
             student.s_semester = semester;
             student.s_academic_session = academicSession;
-            student.User = userId;
+            //student.User = test;
+            student.User = applicationUser;
             student.Id = userId;
             student.s_user = applicationUser.user_name; // Assign the user_name to s_user
 
