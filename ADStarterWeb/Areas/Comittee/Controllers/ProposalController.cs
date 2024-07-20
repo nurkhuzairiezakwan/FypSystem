@@ -43,26 +43,34 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
             var proposals = await _context.Proposals
                 .Include(p => p.Student)
                 .ThenInclude(s => s.User)
-                .Where(p => (p.st_id == "Pending" && p.Student.s_evaluator1 == null && p.Student.s_evaluator2 == null) ||
-                            p.st_id == "Rejected" || p.st_id == "Accepted With Condition")
                 .ToListAsync();
 
-            var proposalViewModels = proposals.Select(p => new ProposalAssignmentViewModel
+            var proposalViewModels = new List<ProposalAssignmentViewModel>();
+
+            foreach (var p in proposals)
             {
-                p_id = p.p_id,
-                s_id = p.s_id,
-                StudentName = p.Student.User.user_name,
-                p_title = p.p_title,
-                p_file = p.p_file,
-                st_id = p.st_id,
-                s_SV = p.Student.s_SV,
-                s_evaluator1 = p.Student.s_evaluator1,
-                s_evaluator2 = p.Student.s_evaluator2,
-                pt_ID = p.Student.User.pt_ID
-            }).ToList();
+                var supervisor = await _userManager.FindByIdAsync(p.Student.s_SV);
+                var supervisorName = supervisor != null ? supervisor.user_name : "Data not found";
+
+                proposalViewModels.Add(new ProposalAssignmentViewModel
+                {
+                    p_id = p.p_id,
+                    s_id = p.s_id,
+                    StudentName = p.Student.User.user_name,
+                    p_title = p.p_title,
+                    p_file = p.p_file,
+                    st_id = p.st_id,
+                    s_SV = supervisorName, // Set the supervisor's name
+                    s_evaluator1 = p.Student.s_evaluator1,
+                    s_evaluator2 = p.Student.s_evaluator2,
+                    pt_ID = p.Student.User.pt_ID,
+                    AvailableEvaluators = new List<SelectListItem>() // Initialize if needed
+                });
+            }
 
             return View(proposalViewModels);
         }
+
 
         // Action to show assign evaluators page
         [HttpGet]

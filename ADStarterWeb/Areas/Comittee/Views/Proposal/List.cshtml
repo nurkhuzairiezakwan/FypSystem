@@ -35,7 +35,16 @@
                                 <tr>
                                     <td>@proposal.p_id</td>
                                     <td>@proposal.p_title</td>
-                                    <td>@proposal.p_file</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(proposal.p_file))
+                                        {
+                                            <a href="@Url.Content(proposal.p_file)" target="_blank">View File</a>
+                                        }
+                                        else
+                                        {
+                                            <span>No File</span>
+                                        }
+                                    </td>
                                     <td>@proposal.st_id</td>
                                     <td>@proposal.p_sv_comment</td>
                                     <td>@proposal.p_evaluator1_comment</td>
@@ -52,7 +61,6 @@
 </div>
 
 @section scripts {
-   
     <script>
         $(document).ready(function () {
             $('#proposalTable').DataTable();

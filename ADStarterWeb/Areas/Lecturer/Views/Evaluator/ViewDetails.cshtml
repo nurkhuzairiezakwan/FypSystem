@@ -68,10 +68,20 @@
                         <div class="col-sm-4"><strong>Evaluator 2 Comment:</strong></div>
                         <div class="col-sm-8">@Model.p_evaluator2_comment</div>                    }
 
-                    <h5>Comment</h5>
-                    <div class="form-group">
-                        <textarea id="comment" name="comment" class="form-control" rows="5"></textarea>
-                    </div>
+                    @if (!string.IsNullOrEmpty(Model.p_sv_comment))
+                    {
+                        <h5>Comment</h5>
+                        <div class="form-group">
+                            <textarea id="comment" name="comment" class="form-control" rows="5"></textarea>
+                        </div>
+                    }
+                    else
+                    {
+                        <h5>Comment</h5>
+                        <div class="form-group">
+                            <textarea id="comment" name="comment" class="form-control" rows="5" disabled placeholder="Supervisor has not commented yet. Please wait until after supervisor has reviewed the proposal"></textarea>
+                        </div>
+                    }
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
