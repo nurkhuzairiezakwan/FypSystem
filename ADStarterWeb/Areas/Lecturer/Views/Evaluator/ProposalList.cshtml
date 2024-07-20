@@ -26,57 +26,69 @@
                         <li class="breadcrumb-item active">Proposal List</li>
                     </ol>
                 </div>
-                <div class="card-header pb-0 card-no-border">
-                    <div class="row">
-                        <div class="col-12 text-right">
-                            <p class="text-muted">e.g. search by title / title / status</p>
+            </div>
+        </div>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Card for Proposal List -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="display" id="basic-6">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Student Name</th>
+                                            <th>Proposal Type</th>
+                                            <th>Proposal Title</th>
+                                            <th>Evaluator 1</th>
+                                            <th>Evaluator 2</th>
+                                            <th>Status</th>
+                                            <th>Proposal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var proposal in Model)
+                                        {
+                                            <tr>
+                                               
+                                                <td>@proposal.s_user</td>
+                                                <td>@proposal.pt_ID</td>
+                                                <td>@proposal.p_title</td>
+                                                <td>@proposal.s_evaluator1</td>
+                                                <td>@proposal.s_evaluator2</td>
+                                                <td>
+                                                    <span class="badge @(proposal.st_id == "Accepted" ? "badge-success" :
+                                                        proposal.st_id == "Accepted with Conditions" ? "badge-warning" :
+                                                        proposal.st_id == "Rejected" ? "badge-danger" :
+                                                        proposal.st_id == "Pending" ? "badge-secondary" : "badge-light")">
+                                                        @proposal.st_id
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @if (proposal.st_id == "Pending")
+                                                    {
+                                                        <a href="@Url.Action("ViewDetails", new { id = proposal?.s_id })" class="btn btn-primary">View Details</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="@Url.Action("ViewDetails", new { id = proposal?.s_id })" class="btn btn-primary">Reevaluate</a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="display" id="basic-6">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Student Name</th>
-                                    <th>Proposal Type</th>
-                                    <th>Proposal Title</th>
-                                    <th>Evaluator 1</th>
-                                    <th>Evaluator 2</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var proposal in Model)
-                                {
-                                    <tr>
-                                        <td>@proposal.p_id</td>
-                                        <td>@proposal.s_user</td>
-                                        <td>@proposal.pt_ID</td>
-                                        <td>@proposal.p_title</td>
-                                        <td>@proposal.s_evaluator1</td>
-                                        <td>@proposal.s_evaluator2</td>
-                                        <td>@proposal.st_id</td>
-                                        <td>
-                                            @if (proposal.st_id == "Pending")
-                                            {
-                                                <a href="@Url.Action("ViewDetails", new { id = proposal?.s_id })" class="btn btn-primary">View Details</a>
-                                            }
-                                            else
-                                            {
-                                                <a href="@Url.Action("ViewDetails", new { id = proposal?.s_id })" class="btn btn-primary">Reevaluate</a>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- End Card -->
                 </div>
             </div>
         </div>
+        <!-- Container-fluid Ends-->
     </div>
 </div>
 

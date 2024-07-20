@@ -52,11 +52,15 @@
                                     <td>@student.UserMatric</td>
                                     <td>@student.UserName</td>
                                     <td>@student.s_SV</td>
-                                    <td>@student.s_statusSV</td>
+                                    <td>
+                                        <span class="badge rounded-pill @(student.s_statusSV == "Pending" ? "badge-light-warning" : student.s_statusSV == "Approved" ? "badge-light-success" : "badge-light-danger")">
+                                            @(!string.IsNullOrEmpty(student.s_statusSV) ? student.s_statusSV : "Data not found")
+                                        </span>
+                                    </td>
                                     <td>@student.s_academic_session</td>
                                     <td>@student.s_semester</td>
                                     <td>
-                                        <a href="@Url.Action("UpdateStatus", "Student", new { area = "Comittee", studentId = @student.s_id })" class="btn btn-primary">Update Status</a>
+                                        <a href="@Url.Action("UpdateStatus", "Student", new { area = "Comittee", studentId = student.s_id })" class="btn btn-primary">Update Status</a>
                                     </td>
                                 </tr>
                             }

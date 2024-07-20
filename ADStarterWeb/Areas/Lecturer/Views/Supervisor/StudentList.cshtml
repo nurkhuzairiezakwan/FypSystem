@@ -26,37 +26,50 @@
                         <li class="breadcrumb-item active">Student List</li>
                     </ol>
                 </div>
-                    <div class="card-header pb-0 card-no-border">
-                        <div class="row">
-                            <div class="col-12 text-right">
-                                <p class="text-muted">e.g. search by academic session / semester / status</p>
-                            </div>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-body">
+                    @if (Model.Count == 0)
+                    {
+                        <div class="text-center">
+                            <p>No students found</p>
                         </div>
-                    </div>
-                    <div class="card-body">
+                    }
+                    else
+                    {
                         <div class="table-responsive">
-                            <table class="display" id="basic-6">
+                            <table id="studentTable" class="table table-bordered display">
                                 <thead>
                                     <tr>
-                                        <th>Matric Number</th>
                                         <th>Full Name</th>
+                                        <th>Matric Number</th>
                                         <th>Contact</th>
                                         <th>Semester</th>
                                         <th>Academic Session</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Proposal Status</th>
+                                        <th>Proposal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var student in Model)
                                     {
                                         <tr>
-                                            <td>@student.user_matric</td>
                                             <td>@student.user_name</td>
+                                            <td>@student.user_matric</td>
                                             <td>@student.user_contact</td>
                                             <td>@student.s_semester</td>
                                             <td>@student.s_academic_session</td>
-                                            <td>@student.st_id</td>
+                                            <td>
+                                                <span class="badge rounded-pill @(student.st_id == "Pending" ? "badge-light-warning" :
+                                                                                 student.st_id == "Approved" ? "badge-light-success" :
+                                                                                 student.st_id == "Rejected" ? "badge-light-danger" :
+                                                                                 "badge-light-secondary")">
+                                                    @(!string.IsNullOrEmpty(student.st_id) ? student.st_id : "Data not found")
+                                                </span>
+                                            </td>
                                             <td>
                                                 @if (student.st_id == "Pending")
                                                 {
@@ -72,13 +85,26 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
-    <!-- Container-fluid Ends-->
 </div>
 
 @section Scripts {
+@*     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css" /> *@
+    <script>
+        $(document).ready(function () {
+            $('#studentTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true
+            });
+        });
+    </script>
 }

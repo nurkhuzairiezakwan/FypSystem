@@ -11,7 +11,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Evaluation Details</h3>
+                    <h3>Proposal Details</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -28,57 +28,82 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Container-fluid starts-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h4>Proposal Title: @Model.p_title</h4>
-                <div class="pdf-viewer">
-                    <iframe src="@filePath" width="75%" height="600px">
-                        This browser does not support PDFs. Please download the PDF to view it: <a href="@filePath">Download PDF</a>
-                    </iframe>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Card for Proposal Title and File -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h2 class="card-title"> Title: @Model.p_title</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="pdf-viewer">
+                                <iframe src="@filePath" width="100%" height="600px">
+                                    This browser does not support PDFs. Please download the PDF to view it: <a href="@filePath">Download PDF</a>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card for Proposal Status and Comments -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Proposal Status and Comments</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="ViewDetails" method="post">
+                                @if (!string.IsNullOrEmpty(Model.p_sv_comment))
+                                {
+                                    <div class="mb-3">
+                                        <label for="sv_comment"><strong>Supervisor Comment:</strong></label>
+                                        <textarea id="sv_comment" name="sv_comment" class="form-control" rows="5" readonly>@Model.p_sv_comment</textarea>
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrEmpty(Model.p_evaluator1_comment))
+                                {
+                                    <div class="mb-3">
+                                        <label for="evaluator1_comment"><strong>Evaluator 1 Comment:</strong></label>
+                                        <textarea id="evaluator1_comment" name="evaluator1_comment" class="form-control" rows="5" readonly>@Model.p_evaluator1_comment</textarea>
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrEmpty(Model.p_evaluator2_comment))
+                                {
+                                    <div class="mb-3">
+                                        <label for="evaluator2_comment"><strong>Evaluator 2 Comment:</strong></label>
+                                        <textarea id="evaluator2_comment" name="evaluator2_comment" class="form-control" rows="5" readonly>@Model.p_evaluator2_comment</textarea>
+                                    </div>
+                                }
+
+                                <input type="hidden" name="s_id" value="@Model.s_id" />
+
+                                <div class="mb-3">
+                                    <label for="st_id">Status</label>
+                                    <select id="st_id" name="st_id" class="form-control @(string.IsNullOrEmpty(Model.p_sv_comment) ? "disabled" : "")">
+                                        <option value="Pending" @(Model.st_id == "Pending" ? "selected" : "")>Pending</option>
+                                        <option value="Accepted" @(Model.st_id == "Accepted" ? "selected" : "")>Accepted</option>
+                                        <option value="Accepted with Conditions" @(Model.st_id == "Accepted with Conditions" ? "selected" : "")>Accepted with Conditions</option>
+                                        <option value="Rejected" @(Model.st_id == "Rejected" ? "selected" : "")>Rejected</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="comment">Comment</label>
+                                    <textarea id="comment" name="comment" class="form-control" rows="5" @(string.IsNullOrEmpty(Model.p_sv_comment) ? "disabled" : "") placeholder="@(string.IsNullOrEmpty(Model.p_sv_comment) ? "Supervisor has not commented yet. Please wait until after supervisor has reviewed the proposal." : "")"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Card -->
                 </div>
-                <h5>Proposal Status</h5>
-                <form asp-action="ViewDetails" method="post">
-                    <input type="hidden" name="s_id" value="@Model.s_id" />
-                    <div class="form-group">
-                        <label for="st_id">Status</label>
-                        <select id="st_id" name="st_id" class="form-control">
-                            <option value="Pending" @(Model.st_id == "Pending" ? "selected" : "")>Pending</option>
-                            <option value="Accepted" @(Model.st_id == "Accepted" ? "selected" : "")>Accepted</option>
-                            <option value="Accepted with Conditions" @(Model.st_id == "Accepted with Conditions" ? "selected" : "")>Accepted with Conditions</option>
-                            <option value="Rejected" @(Model.st_id == "Rejected" ? "selected" : "")>Rejected</option>
-                        </select>
-                    </div>
-
-                    @if (!string.IsNullOrEmpty(Model.p_sv_comment))
-                    { 
-                        <div class="col-sm-4"><strong>Supervisor Comment:</strong></div>
-                        <div class="col-sm-8">@Model.p_sv_comment</div>
-                    }
-
-                    @if (!string.IsNullOrEmpty(Model.p_evaluator1_comment))
-                    {
-                        <div class="col-sm-4"><strong>Evaluator 1 Comment:</strong></div>
-                        <div class="col-sm-8">@Model.p_evaluator1_comment</div>                    }
-                    
-                    @if (!string.IsNullOrEmpty(Model.p_evaluator2_comment))
-                    {
-                        <div class="col-sm-4"><strong>Evaluator 2 Comment:</strong></div>
-                        <div class="col-sm-8">@Model.p_evaluator2_comment</div>                    }
-
-                    <h5>Comment</h5>
-                    <div class="form-group">
-                        <textarea id="comment" name="comment" class="form-control" rows="5"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
             </div>
         </div>
+        <!-- Container-fluid Ends-->
     </div>
-    <!-- Container-fluid Ends-->
 </div>
 
 @section Scripts {

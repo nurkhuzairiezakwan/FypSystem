@@ -5,12 +5,13 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Lecturers</h3>
+                    <h3>Supervisor</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -21,8 +22,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">User Management</li>
-                        <li class="breadcrumb-item active">Lecturers</li>
+                        <li class="breadcrumb-item">Select Supervisor</li>
+                        <li class="breadcrumb-item active">Supervisor</li>
                     </ol>
                 </div>
             </div>
@@ -39,42 +40,44 @@
                         <a href="@Url.Action("AddSupervisor", "SV", new { area = "Student", id=userId })" class="btn btn-primary">Add New Supervisor</a>
                     </div>
                 }
-
-
                 else
                 {
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Academic Session</th>
-                                <th>Semester</th>
                                 <th>Supervisor</th>
-                                <th>Supervisor Status</th>
-                                <th>Agreement View Pdf</th>
+                                <th>Semester</th>
+                                <th>Agreement Letter</th>
                                 <th>Evaluator 1</th>
                                 <th>Evaluator 2</th>
-                                
+                                <th>Supervisor Status</th>
+                                <th>Academic Session</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_academic_session) ? Model.Student.s_academic_session : "Data not found")</td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_semester) ? Model.Student.s_semester : "Data not found")</td>
+                                
                                 <td class="text-center">@(!string.IsNullOrEmpty(Model.SupervisorName) ? Model.SupervisorName : "Data not found")</td>
-                                <td class="text-center" style="color: @(Model.Student.s_statusSV == "Pending" ? "yellow" : Model.Student.s_statusSV == "Approved" ? "green" : "red");">@(!string.IsNullOrEmpty(Model.Student.s_statusSV) ? Model.Student.s_statusSV : "Data not found")</td>
                                 <td class="text-center">
-                                @if (!string.IsNullOrEmpty(Model.Student.s_SVagreement))
-                                {
-                                    <a href="@Model.Student.s_SVagreement" target="_blank">View File</a>
-                                }
-                                else
-                                {
-                                    <span>Data not found</span>
-                                }
+                                    <span class="badge rounded-pill @(Model.Student.s_statusSV == "Pending" ? "badge-light-warning" : Model.Student.s_statusSV == "Approved" ? "badge-light-success" : "badge-light-danger")">
+                                        @(!string.IsNullOrEmpty(Model.Student.s_statusSV) ? Model.Student.s_statusSV : "Data not found")
+                                    </span>
+                                </td>
+
+                                <td class="text-center">
+                                    @if (!string.IsNullOrEmpty(Model.Student.s_SVagreement))
+                                    {
+                                        <a href="@Model.Student.s_SVagreement" target="_blank"><i class="fa fa-download"></i> Download File</a>
+                                    }
+                                    else
+                                    {
+                                        <span>Data not found</span>
+                                    }
                                 </td>
                                 <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator1) ? Model.EvaluatorName1 : "Data not found")</td>
                                 <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator2) ? Model.EvaluatorName2 : "Data not found")</td>
-                                
+                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_academic_session) ? Model.Student.s_academic_session : "Data not found")</td>
+                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_semester) ? Model.Student.s_semester : "Data not found")</td>
                             </tr>
                         </tbody>
                     </table>

@@ -28,30 +28,83 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Container-fluid starts-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h4>Proposal Title: @Model.p_title</h4>
-                <div class="pdf-viewer">
-                    <iframe src="@filePath" width="75%" height="600px">
-                        This browser does not support PDFs. Please download the PDF to view it: <a href="@filePath">Download PDF</a>
-                    </iframe>
-                </div>
-                <h5>Proposal Status</h5>
-                <p>@Model.st_id</p>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Back Button -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
+                    </div>
 
-                <h5>Supervisor Comment</h5>
-                <p>@Model.p_sv_comment</p>  
-                <h5>Evaluator 1 Comment</h5>
-                <p>@Model.p_evaluator1_comment</p>
-                <h5>Evaluator 2 Comment</h5>
-                <p>@Model.p_evaluator2_comment</p>
+                    <!-- Card for Proposal Title and File -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h4 class="card-title">Proposal Title: @Model.p_title</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="pdf-viewer">
+                                <iframe src="@filePath" width="100%" height="600px" style="border: none;">
+                                    This browser does not support PDFs. Please download the PDF to view it: <a href="@filePath">Download PDF</a>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card for Proposal Status and Comments -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Proposal Status and Comments</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h6>Proposal Status:</h6>
+                                <p class="mb-0">@Model.st_id</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Supervisor Comment:</h6>
+                                @if (!string.IsNullOrEmpty(Model.p_sv_comment))
+                                {
+                                    <p class="mb-0">@Model.p_sv_comment</p>
+                                }
+                                else
+                                {
+                                    <p class="mb-0 text-muted">No supervisor comment available.</p>
+                                }
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Evaluator 1 Comment:</h6>
+                                @if (!string.IsNullOrEmpty(Model.p_evaluator1_comment))
+                                {
+                                    <p class="mb-0">@Model.p_evaluator1_comment</p>
+                                }
+                                else
+                                {
+                                    <p class="mb-0 text-muted">No evaluator 1 comment available.</p>
+                                }
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Evaluator 2 Comment:</h6>
+                                @if (!string.IsNullOrEmpty(Model.p_evaluator2_comment))
+                                {
+                                    <p class="mb-0">@Model.p_evaluator2_comment</p>
+                                }
+                                else
+                                {
+                                    <p class="mb-0 text-muted">No evaluator 2 comment available.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
             </div>
         </div>
+        <!-- Container-fluid Ends-->
     </div>
-    <!-- Container-fluid Ends-->
 </div>
 
 @section Scripts {

@@ -25,6 +25,22 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
+                        <label class="badge badge-light-primary">2</label>
+                        <a class="sidebar-link sidebar-title">
+                            <svg class="stroke-icon">
+                                <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="/assets/svg/icon-sprite.svg#fill-home"></use>
+                            </svg>
+                            <span class="lan-3">Dashboard</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Student" asp-controller="Dashboard" asp-action="Index">Main Page</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" asp-area="Student" asp-controller="SV" asp-action="SV">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-sample-page"></use>
@@ -32,7 +48,8 @@
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
-                            <span>Supervisor</span>
+                            <span>Manage </span>
+                            <span>Supervisor </span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -43,6 +60,7 @@
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-sample-page"></use>
                             </svg>
+                            <span>Manage </span>
                             <span>Proposal</span>
                         </a>
                     </li>

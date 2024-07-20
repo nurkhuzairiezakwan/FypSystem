@@ -22,7 +22,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">User Management</li>
+                        <li class="breadcrumb-item">Manage Proposal</li>
                         <li class="breadcrumb-item active">Proposal</li>
                     </ol>
                 </div>
@@ -33,7 +33,7 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
-                @if (Model.p_id == null && svStatus != "Pending")
+                @if (Model.p_id == 0 && svStatus != "Pending")
                 {
                     <div class="text-center">
                         <p>No Record Found</p>
@@ -54,10 +54,10 @@
                                 <th>Proposal Title</th>
                                 <th>Proposal File</th>
                                 <th>Proposal Status</th>
-                                <th>Supervisor Comment</th>
+                                <th>Supervisor Comments</th>
                                 <th>Evaluator 1 Comments</th>
                                 <th>Evaluator 2 Comments</th>
-                                <th>Resubmit</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,15 +66,21 @@
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(Model.p_file))
                                     {
-                                        <a href="@Model.p_file" target="_blank">View File</a>
+                                        <a href="@Model.p_file" target="_blank"><i class="fa fa-download"></i> Download File</a>
                                     }
                                     else
                                     {
                                         <span>Data not found</span>
                                     }
                                 </td>
-                                <td class="text-center" style="color: @(Model.st_id == "Accepted" ? "green" : Model.st_id == "Accepted with Conditions" ? "orange" : Model.st_id == "Rejected" ? "red" : Model.st_id == "Pending" ? "yellow" : "black");">
-                                    @(!string.IsNullOrEmpty(Model.st_id) ? Model.st_id : "Data not found")
+                                <td class="text-center">
+                                    <span class="badge rounded-pill @(string.IsNullOrEmpty(Model.st_id) ? "badge-light-primary" :
+                                        Model.st_id == "Accepted" ? "badge-light-success" :
+                                        Model.st_id == "Accepted with Conditions" ? "badge-light-warning" :
+                                        Model.st_id == "Rejected" ? "badge-light-danger" :
+                                        Model.st_id == "Pending" ? "badge-light-warning" : "badge-light-secondary")">
+                                        @(!string.IsNullOrEmpty(Model.st_id) ? Model.st_id : "Data not found")
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(Model.p_sv_comment))
@@ -121,6 +127,10 @@
     </div>
 </div>
 
-@section Scripts {
-    <!-- Remove or comment out any script related to Read More/Read Less functionality -->
-}
+<script>
+    // Disable the link
+    document.getElementById('resubmitButton')?.addEventListener('click', function (event) {
+        event.preventDefault();  // Prevent the default action
+        return false;  // For older browsers
+    });
+</script>

@@ -18,32 +18,11 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
         </div>
         <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
-            <div class="notification-slider">
-                <div class="d-flex h-100">
-                    <img src="~/assets/images/giftools.gif" alt="gif">
-                    <h6 class="mb-0 f-w-400"><span class="font-primary">Don't Miss Out! </span><span class="f-light">Out new update has been release.</span></h6><i class="icon-arrow-top-right f-light"></i>
-                </div>
-                <div class="d-flex h-100">
-                    <img src="~/assets/images/giftools.gif" alt="gif">
-                    <h6 class="mb-0 f-w-400"><span class="f-light">Something you love is now on sale! </span></h6><a class="ms-1" href="https://1.envato.market/3GVzd" target="_blank">Buy now !</a>
-                </div>
-            </div>
+           
         </div>
         <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
             <ul class="nav-menus">
-                <li class="language-nav">
-                    <div class="translate_wrapper">
-                        <div class="current_lang">
-                            <div class="lang"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN</span></div>
-                        </div>
-                        <div class="more_lang">
-                            <div class="lang selected" data-value="en"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">English<span> (US)</span></span></div>
-                            <div class="lang" data-value="bm"><i class="flag-icon flag-icon-my"></i></i><span class="lang-txt">Bahasa Malaysia</span></div>
-                            <div class="lang" data-value="tm"><i class="flag-icon flag-icon-in"></i></i><span class="lang-txt">Tamil</span></div>
-                            <div class="lang" data-value="cn"><i class="flag-icon flag-icon-cn"></i><span class="lang-txt">简体中文</span></div>
-                        </div>
-                    </div>
-                </li>
+                
                 <li>
                     <div class="mode">
                         <svg>
@@ -51,87 +30,8 @@
                         </svg>
                     </div>
                 </li>
-                <li class="cart-nav onhover-dropdown">
-                    <div class="cart-box">
-                        <svg>
-                            <use href="/assets/svg/icon-sprite.svg#stroke-ecommerce"></use>
-                        </svg><span class="badge rounded-pill badge-success">2</span>
-                    </div>
-                    <div class="cart-dropdown onhover-show-div">
-                        <h6 class="f-18 mb-0 dropdown-title">Cart</h6>
-                        <ul>
-                            <li>
-                                <div class="media">
-                                    <img class="img-fluid b-r-5 me-3 img-60" src="~/assets/images/other-images/cart-img.jpg" alt="">
-                                    <div class="media-body">
-                                        <span>Furniture Chair for Home</span>
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <span class="input-group-prepend">
-                                                    <button class="btn quantity-left-minus" type="button" data-type="minus" data-field="">-</button>
-                                                </span>
-                                                <input class="form-control input-number" type="text" name="quantity" value="1"><span class="input-group-prepend">
-                                                    <button class="btn quantity-right-plus" type="button" data-type="plus" data-field="">+</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h6 class="font-primary">$500</h6>
-                                    </div>
-                                    <div class="close-circle"><a class="bg-danger" href="#"><i data-feather="x"></i></a></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="media">
-                                    <img class="img-fluid b-r-5 me-3 img-60" src="/assets/images/other-images/cart-img.jpg" alt="">
-                                    <div class="media-body">
-                                        <span>Furniture Chair for Home</span>
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <span class="input-group-prepend">
-                                                    <button class="btn quantity-left-minus" type="button" data-type="minus" data-field="">-</button>
-                                                </span>
-                                                <input class="form-control input-number" type="text" name="quantity" value="1"><span class="input-group-prepend">
-                                                    <button class="btn quantity-right-plus" type="button" data-type="plus" data-field="">+</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h6 class="font-primary">$500.00</h6>
-                                    </div>
-                                    <div class="close-circle"><a class="bg-danger" href="#"><i data-feather="x"></i></a></div>
-                                </div>
-                            </li>
-                            <li class="total">
-                                <h6 class="mb-0">Order Total : <span class="f-right">$1000.00</span></h6>
-                            </li>
-                            <li class="text-center"><a class="d-block mb-3 view-cart f-w-700" asp-controller="Ecommerce" asp-action="Cart">Go to your cart</a><a class="btn btn-primary view-checkout" asp-controller="Ecommerce" asp-action="Checkout">Checkout</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="onhover-dropdown">
-                    <div class="notification-box">
-                        <svg>
-                            <use href="/assets/svg/icon-sprite.svg#notification"></use>
-                        </svg><span class="badge rounded-pill badge-secondary">4 </span>
-                    </div>
-                    <div class="onhover-show-div notification-dropdown">
-                        <h6 class="f-18 mb-0 dropdown-title">Notitications</h6>
-                        <ul>
-                            <li class="b-l-primary border-4">
-                                <p>Delivery processing <span class="font-danger">10 min.</span></p>
-                            </li>
-                            <li class="b-l-success border-4">
-                                <p>Order Complete<span class="font-success">1 hr</span></p>
-                            </li>
-                            <li class="b-l-secondary border-4">
-                                <p>Tickets Generated<span class="font-secondary">3 hr</span></p>
-                            </li>
-                            <li class="b-l-warning border-4">
-                                <p>Delivery Complete<span class="font-warning">6 hr</span></p>
-                            </li>
-                            <li><a class="f-w-700" href="#">Check all</a></li>
-                        </ul>
-                    </div>
-                </li>
+                
+               
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -161,12 +61,11 @@
                             {
                                 <li><a asp-area="Customer Service" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
                             }
-                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
-                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
+
                             <li>
+                               
                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/LandingPage/LandingPage/Index">
-                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">LOGOUT</button>
+                                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark"> LOGOUT</button>
                                 </form>
                             </li>
                         </ul>
