@@ -13,7 +13,7 @@ using ADStarter.Models.ViewModels;
 namespace ADStarterWeb.Areas.Comittee.Controllers
 {
     [Area("Comittee")]
-   
+
     public class StudentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -35,19 +35,29 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
                 .Where(s => s.s_statusSV == "Pending" && s.s_SV != null) // Filter students
                 .ToListAsync();
 
-            var studentViewModels = students.Select(s => new StudentStatusUpdateViewModel
+            var studentViewModels = new List<StudentStatusUpdateViewModel>();
+
+            foreach (var student in students)
             {
-                s_id = s.s_id,
-                s_SV = s.s_SV,
-                s_statusSV = s.s_statusSV,
-                s_academic_session = s.s_academic_session,
-                s_semester = s.s_semester,
-                UserName = s.User.user_name,
-                UserMatric = s.User.user_matric
-            }).ToList();
+                var supervisor = await _userManager.FindByIdAsync(student.s_SV);
+
+                var viewModel = new StudentStatusUpdateViewModel
+                {
+                    s_id = student.s_id,
+                    s_SV = supervisor != null ? supervisor.user_name : "Data not found",
+                    s_statusSV = student.s_statusSV,
+                    s_academic_session = student.s_academic_session,
+                    s_semester = student.s_semester,
+                    UserName = student.User.user_name,
+                    UserMatric = student.User.user_matric
+                };
+
+                studentViewModels.Add(viewModel);
+            }
 
             return View(studentViewModels);
         }
+
 
         // Action to show update status page
         [HttpGet]
@@ -62,6 +72,10 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
                 return NotFound();
             }
 
+            // Fetch supervisor's name
+            var supervisor = await _userManager.FindByIdAsync(student.s_SV);
+            var supervisorName = supervisor != null ? supervisor.user_name : "Data not found";
+
             var viewModel = new StudentStatusUpdateDetailViewModel
             {
                 s_id = student.s_id,
@@ -73,8 +87,11 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
                 UserMatric = student.User.user_matric
             };
 
+            ViewBag.SupervisorName = supervisorName;
+
             return View(viewModel);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> UpdateStatus(StudentStatusUpdateDetailViewModel model, IFormFile file)
