@@ -33,7 +33,7 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
-                @if (Model.p_id == null && svStatus != "Pending")
+                @if (Model.p_id == 0 && svStatus != "Pending")
                 {
                     <div class="text-center">
                         <p>No Record Found</p>
@@ -122,5 +122,11 @@
 </div>
 
 @section Scripts {
-    <!-- Remove or comment out any script related to Read More/Read Less functionality -->
+    <script>
+        // Disable the link
+        document.getElementById('resubmitButton').addEventListener('click', function (event) {
+            event.preventDefault();  // Prevent the default action
+            return false;  // For older browsers
+        });
+    </script>
 }

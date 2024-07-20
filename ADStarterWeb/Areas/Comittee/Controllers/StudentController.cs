@@ -13,7 +13,7 @@ using ADStarter.Models.ViewModels;
 namespace ADStarterWeb.Areas.Comittee.Controllers
 {
     [Area("Comittee")]
-   
+
     public class StudentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
