@@ -52,6 +52,12 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
                 var supervisor = await _userManager.FindByIdAsync(p.Student.s_SV);
                 var supervisorName = supervisor != null ? supervisor.user_name : "Data not found";
 
+                var evaluator1 = await _userManager.FindByIdAsync(p.Student.s_evaluator1);
+                var evaluator1Name = evaluator1 != null ? evaluator1.user_name : "Data not found";
+
+                var evaluator2 = await _userManager.FindByIdAsync(p.Student.s_evaluator2);
+                var evaluator2Name = evaluator2 != null ? evaluator2.user_name : "Data not found";
+
                 proposalViewModels.Add(new ProposalAssignmentViewModel
                 {
                     p_id = p.p_id,
@@ -60,9 +66,9 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
                     p_title = p.p_title,
                     p_file = p.p_file,
                     st_id = p.st_id,
-                    s_SV = supervisorName, // Set the supervisor's name
-                    s_evaluator1 = p.Student.s_evaluator1,
-                    s_evaluator2 = p.Student.s_evaluator2,
+                    s_SV = supervisorName,
+                    s_evaluator1 = evaluator1Name, // Use name instead of ID
+                    s_evaluator2 = evaluator2Name, // Use name instead of ID
                     pt_ID = p.Student.User.pt_ID,
                     AvailableEvaluators = new List<SelectListItem>() // Initialize if needed
                 });
@@ -70,6 +76,7 @@ namespace ADStarterWeb.Areas.Comittee.Controllers
 
             return View(proposalViewModels);
         }
+
 
 
         // Action to show assign evaluators page
