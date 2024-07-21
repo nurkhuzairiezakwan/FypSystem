@@ -18008,7 +18008,7 @@ footer {
   position: relative;
   background-position: bottom;
   background-size: cover;
-  background-image: url(../images/landing/home-bg.jpg);
+  background-image: url(../images/landing/background8.jpg);
   background-color: #1b1c21;
 }
 .landing-home .sub-title {
@@ -19973,14 +19973,14 @@ ul.dot-group li {
     25. Authentication CSS Start
 ==========================**/
 .login-card {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  background: url("../images/login/login_bg.jpg");
-  background-position: center;
-  padding: 30px 12px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: url(../images/landing/background8.jpg);
+    background-position: center;
+    padding: 30px 12px;
 }
 .login-card .logo {
   display: block;
