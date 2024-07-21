@@ -27,7 +27,7 @@ namespace   ADStarter.Models
         [DisplayName("Address")]
         public string user_address { get; set; }
         public string? pt_ID { get; set; }
-        public int course_ID { get; set; }
+        public int? course_ID { get; set; }
 
         [ForeignKey("course_ID")]
         public virtual Course course { get; set; }

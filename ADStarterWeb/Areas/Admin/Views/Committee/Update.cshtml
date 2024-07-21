@@ -1,0 +1,127 @@
+﻿@model CommitteeVM
+
+@{
+    ViewData["Title"] = "Committee Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Update Committee</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <svg class="stroke-icon">
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">User</li>
+                        <li class="breadcrumb-item active">Update Committee</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Edit your account</h5>
+                        <p>Enter your personal details to edit the account</p>
+                    </div>
+                    <form id="editForm" asp-action="Update" method="post" class="theme-form">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <input asp-for="User" type="hidden" />
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Name</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="user_name" class="form-control" autocomplete="username" aria-required="true" placeholder="Full Name" />
+                                            <span asp-validation-for="user_name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">IC</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="user_IC" class="form-control" autocomplete="username" aria-required="true" placeholder="e.g 123456789012" />
+                                            <span asp-validation-for="user_IC" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Matric No.</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="user_matric" class="form-control" autocomplete="username" aria-required="true" placeholder="A21EC1234" />
+                                            <span asp-validation-for="user_matric" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Address</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="user_address" class="form-control" autocomplete="username" aria-required="true" placeholder="Address" />
+                                            <span asp-validation-for="user_address" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Contact</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="user_contact" class="form-control" autocomplete="username" aria-required="true" placeholder="Contact Number" />
+                                            <span asp-validation-for="user_contact" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Course</label>
+                                        <div class="col-sm-9">
+                                            <select asp-for="course_ID" asp-items="Model.Courses" class="form-select">
+                                                <option disabled selected value="">-Select Course-</option>
+                                            </select>
+                                            <span asp-validation-for="course_name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Role</label>
+                                        <div class="col-sm-9">
+                                            <select asp-for="SelectedRoleId" asp-items="Model.RolesList" class="form-select">
+                                                <option disabled selected>-Select Role-</option>
+                                            </select>
+                                            <span asp-validation-for="SelectedRoleId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button id="editSubmit" type="submit" class="btn btn-primary">Update Account</button>
+                                <input class="btn btn-light" type="reset" value="Reset">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+}

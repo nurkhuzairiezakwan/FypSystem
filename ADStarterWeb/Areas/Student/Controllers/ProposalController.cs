@@ -46,7 +46,7 @@ namespace ADStarterWeb.Areas.Student.Controllers
             _unitOfWork.Proposal.Add(proposal);
             _unitOfWork.Save();
 
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Proposal", "Proposal");
         }
 
         public IActionResult Proposal()

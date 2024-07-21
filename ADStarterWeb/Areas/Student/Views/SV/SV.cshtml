@@ -10,7 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Lecturers</h3>
+                    <h3>Supervisor</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -21,8 +21,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">User Management</li>
-                        <li class="breadcrumb-item active">Lecturers</li>
+                        <li class="breadcrumb-item">Supervisor</li>
+                        <li class="breadcrumb-item active">Supervisor Status</li>
                     </ol>
                 </div>
             </div>
@@ -58,11 +58,11 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_academic_session) ? Model.Student.s_academic_session : "Data not found")</td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_semester) ? Model.Student.s_semester : "Data not found")</td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.SupervisorName) ? Model.SupervisorName : "Data not found")</td>
-                                <td class="text-center" style="color: @(Model.Student.s_statusSV == "Pending" ? "yellow" : Model.Student.s_statusSV == "Approved" ? "green" : "red");">@(!string.IsNullOrEmpty(Model.Student.s_statusSV) ? Model.Student.s_statusSV : "Data not found")</td>
-                                <td class="text-center">
+                                <td>@(!string.IsNullOrEmpty(Model.Student.s_academic_session) ? Model.Student.s_academic_session : "Data not found")</td>
+                                <td>@(!string.IsNullOrEmpty(Model.Student.s_semester) ? Model.Student.s_semester : "Data not found")</td>
+                                <td>@(!string.IsNullOrEmpty(Model.SupervisorName) ? Model.SupervisorName : "Data not found")</td>
+                                <td style="color: @(Model.Student.s_statusSV == "Pending" ? "yellow" : Model.Student.s_statusSV == "Approved" ? "green" : "red");">@(!string.IsNullOrEmpty(Model.Student.s_statusSV) ? Model.Student.s_statusSV : "Data not found")</td>
+                                <td>
                                 @if (!string.IsNullOrEmpty(Model.Student.s_SVagreement))
                                 {
                                     <a href="@Model.Student.s_SVagreement" target="_blank">View File</a>
@@ -72,8 +72,8 @@
                                     <span>Data not found</span>
                                 }
                                 </td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator1) ? Model.EvaluatorName1 : "Data not found")</td>
-                                <td class="text-center">@(!string.IsNullOrEmpty(Model.Student.s_evaluator2) ? Model.EvaluatorName2 : "Data not found")</td>
+                                <td>@(!string.IsNullOrEmpty(Model.Student.s_evaluator1) ? Model.EvaluatorName1 : "Not Yet Assign")</td>
+                                <td>@(!string.IsNullOrEmpty(Model.Student.s_evaluator2) ? Model.EvaluatorName2 : "Not Yet Assign")</td>
                                 
                             </tr>
                         </tbody>

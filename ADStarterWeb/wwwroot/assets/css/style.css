@@ -19620,7 +19620,7 @@ footer {
   position: relative;
   background-position: bottom;
   background-size: cover;
-  background-image: url(../images/landing/home-bg.jpg);
+  background-image: url(../images/utmbackground.jpg);
   background-color: #1b1c21;
 }
 .landing-home .sub-title {
@@ -21590,7 +21590,7 @@ ul.dot-group li {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background: url("../images/login/login_bg.jpg");
+  background: url("../images/loginbg.png");
   background-position: center;
   padding: 30px 12px;
 }

@@ -9,57 +9,75 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Lecturers</h3>
+                    <h3>Lecturer List</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a asp-controller="Dashboard" asp-action="Index">
                                 <svg class="stroke-icon">
-                                    <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
+                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">User Management</li>
-                        <li class="breadcrumb-item active">Lecturers</li>
+                        <li class="breadcrumb-item">Manage User</li>
+                        <li class="breadcrumb-item active">Lecturer List</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Matric Number</th>
-                            <th>Full Name</th>
-                            <th>Project Type</th>
-                            <th>Course Description</th>
-                            <th>Roles</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var lecturer in Model)
-                        {
-                            <tr>
-                                <td>@lecturer.user_matric</td>
-                                <td>@lecturer.user_name</td>
-                                <td>@lecturer.pt_ID</td>
-                                <td>@lecturer.course_desc</td>
-                                <td>@string.Join(", ", lecturer.roles)</td>
-                                <td>
-                                    @* <a asp-area="Comittee" asp-controller="UserList" asp-action="Edit" asp-route-userId="@lecturer.Id" class="btn btn-primary">Edit</a> *@
-                                    <a href="@Url.Action("Edit", "UserList", new { area = "Comittee", userId = @lecturer.Id})" class="btn btn-primary">Edit</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="display" id="lecturersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Matric Number</th>
+                                        <th>Full Name</th>
+                                        <th>Project Type</th>
+                                        <th>Course Description</th>
+                                        <th>Roles</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var lecturer in Model)
+                                    {
+                                        <tr>
+                                            <td>@lecturer.user_matric</td>
+                                            <td>@lecturer.user_name</td>
+                                            <td>@lecturer.pt_ID</td>
+                                            <td>@lecturer.course_desc</td>
+                                            <td>@string.Join(", ", lecturer.roles)</td>
+                                            <td>
+                                                <a href="@Url.Action("Edit", "UserList", new { area = "Comittee", userId = lecturer.Id })" class="btn btn-primary">Edit</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Complex headers (rowspan and colspan) Ends-->
         </div>
     </div>
+    <!-- Container-fluid Ends-->
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#lecturersTable').DataTable();
+        });
+    </script>
+}

@@ -15,7 +15,6 @@
             </a>
         </div>
         <nav class="sidebar-main">
-            <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="sidebar-menu">
                 <ul class="sidebar-links flex-container" id="simple-bar">
                     <li class="sidebar-main-title">
@@ -51,8 +50,8 @@
                             <span>Manage User</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a asp-area="Comittee" asp-controller="UserList" asp-action="ListLecturers">List of Lecturers</a></li>
-                            <li><a asp-area="Comittee" asp-controller="Student" asp-action="ListStudents">Manage Student Supervisor</a></li>
+                            <li><a asp-area="Comittee" asp-controller="UserList" asp-action="ListLecturers">Lecturer List</a></li>
+                            <li><a asp-area="Comittee" asp-controller="Student" asp-action="ListStudents">Supervisor Approval</a></li>
                         </ul>
                     </li>
 
@@ -68,7 +67,7 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a asp-area="Comittee" asp-controller="Proposal" asp-action="List">List Proposal</a></li>
-                            <li><a asp-area="Comittee" asp-controller="Proposal" asp-action="ListProposals">List pending Proposal</a></li>
+                            <li><a asp-area="Comittee" asp-controller="Proposal" asp-action="ListProposals">Assign Evaluator</a></li>
                         </ul>
                     </li>
     

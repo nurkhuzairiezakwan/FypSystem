@@ -29,9 +29,9 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Contains("Committee") || roles.Contains("Lecturer"))
+                if (roles.Contains("Lecturer"))
                 {
-                    var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
+                    var course = await _unitOfWork.Course.GetByIdAsync((int)user.course_ID);
                     var thisViewModel = new LecturerVM
                     {
                         user_IC = user.user_IC,
@@ -61,7 +61,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             }
 
             var roles = await _userManager.GetRolesAsync(user);
-            var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
+            var course = await _unitOfWork.Course.GetByIdAsync((int)user.course_ID);
             var model = new LecturerVM
             {
                 user_IC = user.user_IC,
@@ -90,7 +90,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             var rolename = roles[0];
             var role = await _roleManager.FindByNameAsync(rolename);
-            var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
+            var course = await _unitOfWork.Course.GetByIdAsync((int)user.course_ID);
             var model = new LecturerVM
             {
                 user_IC = user.user_IC,
@@ -101,7 +101,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
                 user_contact = user.user_contact,
                 user_matric = user.user_matric,
                 pt_ID = user.pt_ID,
-                course_ID = user.course_ID,
+                course_ID = (int)user.course_ID,
                 SelectedRoleId = role.Id,
                 Courses = _unitOfWork.Course.GetAll().Select(c => new SelectListItem 
                 {   Value = c.course_ID.ToString(), 
@@ -121,7 +121,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByIdAsync(model.User);
-                var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
+                var course = await _unitOfWork.Course.GetByIdAsync((int)user.course_ID);
 
                 var existingUserByEmail = await _userManager.FindByEmailAsync(model.Email);
                 if (existingUserByEmail != null && existingUserByEmail.Id != user.Id)

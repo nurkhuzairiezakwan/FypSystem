@@ -8,11 +8,11 @@
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
-        <div class="logo-icon-wrapper">
+        @* <div class="logo-icon-wrapper">
             <a asp-area="Admin" asp-controller="AdminDashboard" asp-action="Index">
                 <img class="img-fluid" src="/assets/images/logo/logoAD.png" alt="">
             </a>
-        </div>
+        </div> *@
         <nav class="sidebar-main">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="sidebar-menu">
@@ -50,15 +50,19 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" asp-area="Admin" asp-controller="Lecturer" asp-action="LecturerList">
+                        <a class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="/assets/svg/icon-sprite.svg#stroke-learning"></use>
                             </svg>
                             <svg class="fill-icon">
                                 <use href="/assets/svg/icon-sprite.svg#fill-learning"></use>
                             </svg>
-                            <span>Lecturer</span>
+                            <span>Users</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="Admin" asp-controller="Lecturer" asp-action="LecturerList">Lecturer List</a></li>
+                            <li><a asp-area="Admin" asp-controller="Committee" asp-action="CommitteeList">Committee List</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

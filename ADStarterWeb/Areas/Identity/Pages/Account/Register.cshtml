@@ -11,8 +11,8 @@
             <div>
                 <div>
                     <a class="logo" asp-controller="Dashboard" asp-action="Index">
-                        <img class="img-fluid for-light" src="~/assets/images/logo/logoAD.png" style="width:200px" alt="login page">
-                        <img class="img-fluid for-dark" src="~/assets/images/logo/logoAD.png" style="width:200px" alt="login page">
+                        <img class="img-fluid for-light" src="~/assets/images/logo_utm.png" style="width:200px" alt="login page">
+                        <img class="img-fluid for-dark" src="~/assets/images/logo_utm.png" style="width:200px" alt="login page">
                     </a>
                 </div>
                 <div class="login-main" style="width:750px">
@@ -21,60 +21,77 @@
                         <p>Enter your personal details to create an account</p>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
+                        <!-- Name -->
                         <div class="form-group">
                             <label class="col-form-label pt-0">Name</label>
                             <input asp-for="Input.user_name" class="form-control" autocomplete="username" aria-required="true" placeholder="Ali Bin Abu" />
                             <span asp-validation-for="Input.user_name" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-form-label pt-0">IC</label>
-                            <input asp-for="Input.user_IC" class="form-control" aria-required="true" placeholder="123456789012" />
-                            <span asp-validation-for="Input.user_IC" class="text-danger"></span>
+                        <!-- IC and Matric -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0">IC</label>
+                                    <input asp-for="Input.user_IC" class="form-control" aria-required="true" placeholder="123456789012" />
+                                    <span asp-validation-for="Input.user_IC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0">Matric No.</label>
+                                    <input asp-for="Input.user_matric" class="form-control" aria-required="true" placeholder="A21EC1234" />
+                                    <span asp-validation-for="Input.user_matric" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-form-label pt-0">Matric No.</label>
-                            <input asp-for="Input.user_matric" class="form-control" aria-required="true" placeholder="A21EC1234" />
-                            <span asp-validation-for="Input.user_matric" class="text-danger"></span>
-                        </div>
-
+                        <!-- Address -->
                         <div class="form-group">
                             <label class="col-form-label pt-0">Address</label>
                             <input asp-for="Input.user_address" class="form-control" type="address" aria-required="true" placeholder="Address" />
                             <span asp-validation-for="Input.user_address" class="text-danger"></span>
                         </div>
 
+                        <!-- Contact, Course, and Project Type -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0">Contact</label>
+                                    <input asp-for="Input.user_contact" class="form-control" type="ph" aria-required="true" placeholder="Contact Number" />
+                                    <span asp-validation-for="Input.user_contact" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0">Course</label>
+                                    <select asp-for="Input.course_ID" asp-items="Model.Input.CourseList" class="form-select">
+                                        <option disabled selected value="">-Select Course-</option>
+                                    </select>
+                                    <span asp-validation-for="Input.course_ID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label asp-for="Input.pt_ID" class="col-form-label pt-0">Project Type</label>
+                                    <select asp-for="Input.pt_ID" class="form-select">
+                                        <option disabled selected>Select Domain</option>
+                                        <option value="Development">Development</option>
+                                        <option value="Research">Research</option>
+                                    </select>
+                                    <span asp-validation-for="Input.pt_ID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
                         <div class="form-group">
                             <label class="col-form-label pt-0">Email</label>
                             <input asp-for="Input.Email" class="form-control" type="email" aria-required="true" placeholder="name@example.com" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-form-label pt-0">Contact</label>
-                            <input asp-for="Input.user_contact" class="form-control" type="ph" aria-required="true" placeholder="Contact Number" />
-                            <span asp-validation-for="Input.user_contact" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label pt-0">Course</label>
-                            <select asp-for="Input.course_ID" asp-items="Model.Input.CourseList" class="form-select">
-                                <option disabled selected value="">-Select Course-</option>
-                            </select>
-                            <span asp-validation-for="Input.course_ID" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Input.pt_ID" class="col-form-label pt-0">Project Type</label>
-                            <select asp-for="Input.pt_ID" class="form-select">
-                                <option disabled selected>Select Domain</option>
-                                <option value="Development">Development</option>
-                                <option value="Research">Research</option>
-                            </select>
-                            <span asp-validation-for="Input.pt_ID" class="text-danger"></span>
-                        </div>
-
+                        <!-- Password -->
                         <div class="form-group">
                             <label class="col-form-label pt-0">Password</label>
                             <div class="form-input position-relative">
@@ -84,6 +101,7 @@
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
 
+                        <!-- Confirm Password -->
                         <div class="form-group">
                             <label class="col-form-label pt-0">Confirm Password</label>
                             <div class="form-input position-relative">
@@ -92,21 +110,22 @@
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-                        @* @if (User.IsInRole(SD.Role_Admin))
-                        { *@
-                        <div class="form-group">
-                            <label class="col-form-label pt-0">Select Role</label>
-                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                                <option disabled selected>-Select Role-</option>
-                            </select>
-                        </div>
-                        @* } *@
+
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <div class="form-group">
+                                <label class="col-form-label pt-0">Select Role</label>
+                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                    <option disabled selected>-Select Role-</option>
+                                </select>
+                            </div>
+                        }
+
                         <div class="form-group mb-0">
                             <button id="registerSubmit" type="submit" class="btn btn-primary btn-block w-100">Create Account</button>
                         </div>
 
-                        <h6 class="text-muted mt-4 or">Or sign up with</h6>
-                        <p class="mt-4 mb-0">
+                        <p class="mt-4 mb-0 text-center">
                             Already have an account?
                             <a class="ms-2" asp-page="./Login">Sign in</a>
                         </p>

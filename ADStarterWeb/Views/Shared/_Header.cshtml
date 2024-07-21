@@ -2,7 +2,7 @@
 @inject UserManager<ApplicationUser> UserManager
 <div class="page-header">
     <div class="header-wrapper row m-0">
-        <form class="form-inline search-full col" action="#" method="get">
+        @* <form class="form-inline search-full col" action="#" method="get">
             <div class="form-group w-100">
                 <div class="Typeahead Typeahead--twitterUsers">
                     <div class="u-posRelative">
@@ -12,12 +12,12 @@
                     <div class="Typeahead-menu"></div>
                 </div>
             </div>
-        </form>
+        </form> *@
         <div class="header-logo-wrapper col-auto p-0">
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="~/assets/images/logo/logo.png" alt=""></a></div>
+            <div class="logo-wrapper"><img class="img-fluid" src="~/assets/images/logo_utm.png" alt=""></a></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
         </div>
-        <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
+        @* <div class="left-header col-xxl-5 col-xl-6 col-lg-5 col-md-4 col-sm-3 p-0">
             <div class="notification-slider">
                 <div class="d-flex h-100">
                     <img src="~/assets/images/giftools.gif" alt="gif">
@@ -28,10 +28,10 @@
                     <h6 class="mb-0 f-w-400"><span class="f-light">Something you love is now on sale! </span></h6><a class="ms-1" href="https://1.envato.market/3GVzd" target="_blank">Buy now !</a>
                 </div>
             </div>
-        </div>
+        </div> *@
         <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
             <ul class="nav-menus">
-                <li class="language-nav">
+@*                 <li class="language-nav">
                     <div class="translate_wrapper">
                         <div class="current_lang">
                             <div class="lang"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN</span></div>
@@ -131,7 +131,7 @@
                             <li><a class="f-w-700" href="#">Check all</a></li>
                         </ul>
                     </div>
-                </li>
+                </li> *@
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -143,27 +143,11 @@
                         <div class="media profile-media">
                             <img class="b-r-10" src="/assets/images/dashboard/profile.png" alt="">
                             <div class="media-body">
-                                <span>Hello @UserManager.GetUserName(User)!</span>
+                                <span>Hello @user.user_name!</span>
                                 <p class="mb-0 font-roboto">@role <i class="middle fa fa-angle-down"></i></p>
                             </div>
                         </div>
-                        <ul class="profile-dropdown onhover-show-div">
-                            @if (User.IsInRole(SD.Role_Committee))
-                            {
-                                <li><a asp-area="Parent" asp-controller="Registration" asp-action="UserEdit"><i data-feather="user"></i><span>Account </span></a></li>
-                            }@if (User.IsInRole(SD.Role_Admin))
-                            {
-                                <li><a asp-area="Admin" asp-controller="AdminDashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
-                            }@if (User.IsInRole(SD.Role_Student))
-                            {
-                                <li><a asp-area="Therapist" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
-                            }@if (User.IsInRole(SD.Role_Lecturer))
-                            {
-                                <li><a asp-area="Customer Service" asp-controller="Dashboard" asp-action="UpdateProfile"><i data-feather="user"></i><span>Account </span></a></li>
-                            }
-                            <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                            <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
-                            <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
+                        <ul class="profile-dropdown onhover-show-div">           
                             <li>
                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/LandingPage/LandingPage/Index">
                                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark">LOGOUT</button>

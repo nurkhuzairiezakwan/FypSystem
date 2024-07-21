@@ -23,8 +23,8 @@ namespace ADStarter.DataAccess.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Course>().HasData(
-                new Course { course_ID = 1, course_desc = "Data Engineering", course_code = "SECPH", course_count="41" },
-                new Course { course_ID = 2, course_desc = "Software Engineering", course_code = "SECJ" ,course_count = "41" }
+                new Course { course_ID = 1, course_desc = "Data Engineering", course_code = "SECPH", course_count = "41" },
+                new Course { course_ID = 2, course_desc = "Software Engineering", course_code = "SECJ", course_count = "41" }
 
                 );
 

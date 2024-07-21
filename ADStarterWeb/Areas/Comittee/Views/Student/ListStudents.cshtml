@@ -10,7 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Students</h3>
+                    <h3>Student List</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -21,49 +21,64 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item">User Management</li>
-                        <li class="breadcrumb-item active">Students</li>
+                        <li class="breadcrumb-item">Manage User</li>
+                        <li class="breadcrumb-item active">Student List</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Matric Number</th>
-                                <th>Full Name</th>
-                                <th>Supervisor</th>
-                                <th>Status SV</th>
-                                <th>Academic Session</th>
-                                <th>Semester</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var student in Model)
-                            {
-                                <tr>
-                                    <td>@student.UserMatric</td>
-                                    <td>@student.UserName</td>
-                                    <td>@student.s_SV</td>
-                                    <td>@student.s_statusSV</td>
-                                    <td>@student.s_academic_session</td>
-                                    <td>@student.s_semester</td>
-                                    <td>
-                                        <a href="@Url.Action("UpdateStatus", "Student", new { area = "Comittee", studentId = @student.s_id })" class="btn btn-primary">Update Status</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="display" id="studentsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Matric Number</th>
+                                        <th>Full Name</th>
+                                        <th>Supervisor</th>
+                                        <th>Status SV</th>
+                                        <th>Academic Session</th>
+                                        <th>Semester</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var student in Model)
+                                    {
+                                        <tr>
+                                            <td>@student.UserMatric</td>
+                                            <td>@student.UserName</td>
+                                            <td>@student.s_SV</td>
+                                            <td>@student.s_statusSV</td>
+                                            <td>@student.s_academic_session</td>
+                                            <td>@student.s_semester</td>
+                                            <td>
+                                                <a href="@Url.Action("UpdateStatus", "Student", new { area = "Comittee", studentId = @student.s_id })" class="btn btn-primary">Update Status</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- Complex headers (rowspan and colspan) Ends-->
         </div>
     </div>
+    <!-- Container-fluid Ends-->
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#studentsTable').DataTable();
+        });
+    </script>
+}
