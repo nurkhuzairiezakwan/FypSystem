@@ -24,7 +24,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
         {
             var userId = _userManager.GetUserId(User);
             var users = _userManager.Users.ToList();
-            var studentVM = new List<StudentVM>();
+            var studentVM = new List<StudentViewModels>();
 
             foreach (var user in users)
             {
@@ -35,7 +35,7 @@ namespace ADStarterWeb.Areas.Lecturer.Controllers
                     if (student != null)
                     {
                         var proposal = _unitOfWork.Proposal.Get(p => p.s_id == student.s_id);
-                        var thisViewModel = new StudentVM
+                        var thisViewModel = new StudentViewModels
                         {
                             s_id = student.s_id,
                             s_user = student.s_user,

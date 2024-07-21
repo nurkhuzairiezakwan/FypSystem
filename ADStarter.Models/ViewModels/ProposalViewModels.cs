@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADStarter.Models.ViewModels
 {
-    public class ProposalVM
+    public class ProposalViewModels
     {
         public int p_id { get; set; }
         public string p_title { get; set; }

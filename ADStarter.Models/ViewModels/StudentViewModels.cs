@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ADStarter.Models.ViewModels
 {
-    public class StudentVM
+    public class StudentViewModels
     {
         public int s_id { get; set; }
         public string s_user { get; set; }

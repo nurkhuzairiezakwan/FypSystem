@@ -24,7 +24,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
         {
 
             var users = _userManager.Users.ToList();
-            var lecturerVM = new List<LecturerVM>();
+            var lecturerVM = new List<LecturerViewModels>();
 
             foreach (var user in users)
             {
@@ -32,7 +32,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
                 if (roles.Contains("Committee") || roles.Contains("Lecturer"))
                 {
                     var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
-                    var thisViewModel = new LecturerVM
+                    var thisViewModel = new LecturerViewModels
                     {
                         user_IC = user.user_IC,
                         user_name = user.user_name,
@@ -62,7 +62,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
 
             var roles = await _userManager.GetRolesAsync(user);
             var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
-            var model = new LecturerVM
+            var model = new LecturerViewModels
             {
                 user_IC = user.user_IC,
                 user_name = user.user_name,
@@ -91,7 +91,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             var rolename = roles[0];
             var role = await _roleManager.FindByNameAsync(rolename);
             var course = await _unitOfWork.Course.GetByIdAsync(user.course_ID);
-            var model = new LecturerVM
+            var model = new LecturerViewModels
             {
                 user_IC = user.user_IC,
                 user_name = user.user_name,
@@ -116,7 +116,7 @@ namespace ADStarterWeb.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(LecturerVM model)
+        public async Task<IActionResult> Update(LecturerViewModels model)
         {
             if (ModelState.IsValid)
             {

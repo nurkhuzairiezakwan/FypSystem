@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ADStarter.Models.ViewModels
 {
-    public class LecturerVM
+    public class LecturerViewModels
     {
         public string? User { get; set; }
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]

@@ -59,7 +59,7 @@ namespace ADStarterWeb.Areas.Student.Controllers
 
             }
 
-            var viewModel = new StudentVM
+            var viewModel = new StudentViewModels
             {
                 Student = student,
                 SupervisorName = supervisorName,
@@ -77,11 +77,11 @@ namespace ADStarterWeb.Areas.Student.Controllers
         public async Task<IActionResult> AddSupervisor(string id)
         {
             var users = await _userManager.GetUsersInRoleAsync("Lecturer");
-            var lecturerVM = new List<StudentVM>();
+            var lecturerVM = new List<StudentViewModels>();
 
             foreach (var user in users)
             {
-                var thisViewModel = new StudentVM
+                var thisViewModel = new StudentViewModels
                 {
                     User = user,
                     user_name = user.user_name,
