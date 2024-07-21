@@ -18,7 +18,7 @@
                         <li class="breadcrumb-item">
                             <a asp-controller="Dashboard" asp-action="Index">
                                 <svg class="stroke-icon">
-                                    <use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+                                    <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
                                 </svg>
                             </a>
                         </li>
@@ -41,16 +41,6 @@
                 </div>
                 <h5>Proposal Status</h5>
                 <form asp-action="ViewDetails" method="post">
-                    <input type="hidden" name="s_id" value="@Model.s_id" />
-                    <div class="form-group">
-                        <label for="st_id">Status</label>
-                        <select id="st_id" name="st_id" class="form-control">
-                            <option value="Pending" @(Model.st_id == "Pending" ? "selected" : "")>Pending</option>
-                            <option value="Accepted" @(Model.st_id == "Accepted" ? "selected" : "")>Accepted</option>
-                            <option value="Accepted with Conditions" @(Model.st_id == "Accepted with Conditions" ? "selected" : "")>Accepted with Conditions</option>
-                            <option value="Rejected" @(Model.st_id == "Rejected" ? "selected" : "")>Rejected</option>
-                        </select>
-                    </div>
 
                     @if (!string.IsNullOrEmpty(Model.p_sv_comment))
                     { 
@@ -70,6 +60,16 @@
 
                     @if (!string.IsNullOrEmpty(Model.p_sv_comment))
                     {
+                        <input type="hidden" name="s_id" value="@Model.s_id" />
+                        <div class="form-group">
+                            <label for="st_id">Status</label>
+                            <select id="st_id" name="st_id" class="form-control">
+                                <option value="Pending" @(Model.st_id == "Pending" ? "selected" : "")>Pending</option>
+                                <option value="Accepted" @(Model.st_id == "Accepted" ? "selected" : "")>Accepted</option>
+                                <option value="Accepted with Conditions" @(Model.st_id == "Accepted with Conditions" ? "selected" : "")>Accepted with Conditions</option>
+                                <option value="Rejected" @(Model.st_id == "Rejected" ? "selected" : "")>Rejected</option>
+                            </select>
+                        </div>
                         <h5>Comment</h5>
                         <div class="form-group">
                             <textarea id="comment" name="comment" class="form-control" rows="5"></textarea>
@@ -77,6 +77,16 @@
                     }
                     else
                     {
+                        <input type="hidden" name="s_id" value="@Model.s_id" />
+                        <div class="form-group">
+                            <label for="st_id">Status</label>
+                            <select id="st_id" name="st_id" class="form-control" disabled>
+                                <option value="Pending" @(Model.st_id == "Pending" ? "selected" : "")>Pending</option>
+                                <option value="Accepted" @(Model.st_id == "Accepted" ? "selected" : "")>Accepted</option>
+                                <option value="Accepted with Conditions" @(Model.st_id == "Accepted with Conditions" ? "selected" : "")>Accepted with Conditions</option>
+                                <option value="Rejected" @(Model.st_id == "Rejected" ? "selected" : "")>Rejected</option>
+                            </select>
+                        </div>
                         <h5>Comment</h5>
                         <div class="form-group">
                             <textarea id="comment" name="comment" class="form-control" rows="5" disabled placeholder="Supervisor has not commented yet. Please wait until after supervisor has reviewed the proposal"></textarea>

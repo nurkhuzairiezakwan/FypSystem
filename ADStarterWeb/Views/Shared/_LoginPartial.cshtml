@@ -3,34 +3,6 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
-@* <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-=======
-<ul class="navbar-nav">
-@* @if (SignInManager.IsSignedIn(User))
->>>>>>> Stashed changes
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("landingPages", "landingPage", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-        <li class="nav-item">
-            <a class="nav-link btn btn-primary rounded-pill mr-2" id="register" asp-area="Identity" asp-page="/Account/Register" style="padding: 8px 16px; background-color: #007bff;">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link btn btn-secondary rounded-pill" id="login" asp-area="Identity" asp-page="/Account/Login" style="padding: 8px 16px; background-color: #6c757d;">Login</a>
-        </li>
-
-}
-</ul> *@
 <ul class="navbar-nav">
     <li class="nav-item">
         <a class="nav-link btn btn-primary rounded-pill" id="register" asp-area="Identity" asp-page="/Account/Register" style="padding: 8px 16px; margin-right: 12px;">Register</a>

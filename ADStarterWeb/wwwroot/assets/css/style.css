@@ -19620,7 +19620,7 @@ footer {
   position: relative;
   background-position: bottom;
   background-size: cover;
-  background-image: url(../images/landing/home-bg.jpg);
+  background-image: url(/images/dash/BGImage.png);
   background-color: #1b1c21;
 }
 .landing-home .sub-title {
