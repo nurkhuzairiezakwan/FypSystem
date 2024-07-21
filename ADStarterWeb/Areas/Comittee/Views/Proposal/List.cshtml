@@ -19,26 +19,26 @@
                     <table id="proposalTable" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Proposal ID</th>
+                                <th>Student Name</th>
                                 <th>Title</th>
                                 <th>Proposal File</th>
                                 <th>Evaluation Result</th>
                                 <th>Supervisor Comment</th>
                                 <th>Evaluator 1 Comment</th>
                                 <th>Evaluator 2 Comment</th>
-                                <th>Student Name</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var proposal in Model)
                             {
                                 <tr>
-                                    <td>@proposal.p_id</td>
+                                    <td>@proposal.Student.User.user_name</td>
                                     <td>@proposal.p_title</td>
                                     <td>
                                         @if (!string.IsNullOrEmpty(proposal.p_file))
                                         {
-                                            <a href="@Url.Content(proposal.p_file)" target="_blank">View File</a>
+                                            <a href="@Url.Content(proposal.p_file)" target="_blank"><i class="fa fa-download"></i> Download File</a>
                                         }
                                         else
                                         {
@@ -49,7 +49,7 @@
                                     <td>@proposal.p_sv_comment</td>
                                     <td>@proposal.p_evaluator1_comment</td>
                                     <td>@proposal.p_evaluator2_comment</td>
-                                    <td>@proposal.Student.User.user_name</td>
+                                    
                                 </tr>
                             }
                         </tbody>

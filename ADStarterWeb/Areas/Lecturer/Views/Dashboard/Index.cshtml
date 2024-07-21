@@ -7,7 +7,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Lecturer Dashboard</h3>
+                    <h3>Welcome to FYP System</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Main     </li>
+                        <li class="breadcrumb-item active">Main</li>
                     </ol>
                 </div>
             </div>
@@ -27,7 +27,31 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-        
+        <div class="col-xl-6 xl-100 col-lg-12 box-col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="pull-left">Instruction</h5>
+                </div>
+                <div class="card-body">
+                    <div class="tabbed-card">
+                        <ul class="pull-right nav nav-pills nav-primary" id="pills-clrtab1" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" id="pills-clrhome-tab1" data-bs-toggle="pill" href="#pills-clrhome1" role="tab" aria-controls="pills-clrhome1" aria-selected="true">Manage Student</a></li>
+                            <li class="nav-item"><a class="nav-link" id="pills-clrprofile-tab1" data-bs-toggle="pill" href="#pills-clrprofile1" role="tab" aria-controls="pills-clrprofile1" aria-selected="false">Evaluate Proposal</a></li>
+                 
+                        </ul>
+                        <div class="tab-content" id="pills-clrtabContent1">
+                            <div class="tab-pane fade show active" id="pills-clrhome1" role="tabpanel" aria-labelledby="pills-clrhome-tab1">
+                                <p>First, lecturers can be a supervisor or an evaluator based on respective courses. So if you are chosen as a supervisor then in the manage student will show list of student under your supervision. You will be able to see the students proposal status and proposal file to give comments.</p>
+                            </div>
+                            <div class="tab-pane fade" id="pills-clrprofile1" role="tabpanel" aria-labelledby="pills-clrprofile-tab1">
+                                <p>In this tab if you were selected as a evaluator then the proposal will be listed here. You can give comments and change the proposal status as "Accepted", "Rejected" or "Accepted with condition" after another evaluator comments. Note that onky after the supervisor commented then you as an evaluator can evaluate. After evaluation has been made you can reevaluate the proposal if changes to be made. The student can resubmit the proposal based on the evaluation.</p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Container-fluid Ends-->
 </div>

@@ -51,7 +51,6 @@
                             <option value="Development" @(Model.pt_ID == "Development" ? "selected" : "")>Development</option>
                             <option value="Research" @(Model.pt_ID == "Research" ? "selected" : "")>Research</option>
                         </select>
-                        <small class="form-text text-muted">Select "Development" or "Research" or leave as is.</small>
                     </div>
                     <div class="form-group">
                         <label for="course_desc">Course ID</label>
@@ -65,9 +64,11 @@
                         }
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-
-                    <a href="@Url.Action("Index", "Dashboard")" class="btn btn-secondary">Cancel</a>
+                    <div class="mt-4">
+                        <!-- Added margin top utility class -->
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a href="@Url.Action("Index", "Dashboard")" class="btn btn-secondary">Cancel</a>
+                    </div>
 
                 </form>
             </div>
